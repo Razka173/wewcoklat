@@ -97,18 +97,18 @@ class Registrasi extends CI_Controller {
 		// Verifikasi Email Pelanggan
 		$this->load->library('email');
 	    $config = array();
-	    $config['charset'] = 'utf-8';
-	    $config['useragent'] = 'Codeigniter';
-	    $config['protocol']= "smtp";
-	    $config['mailtype']= "html";
-	    $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
-	    $config['smtp_port']= "465";
-	    $config['smtp_timeout']= "400";
-	    $config['smtp_user']= $email_sender; // isi dengan email kamu
-	    $config['smtp_pass']= $email_password; // isi dengan password kamu
-	    $config['crlf']="\r\n"; 
-	    $config['newline']="\r\n"; 
-	    $config['wordwrap'] = TRUE;
+	    $config['charset'] 		= 'utf-8';
+	    $config['useragent'] 	= 'Codeigniter';
+	    $config['protocol']		= "smtp";
+	    $config['mailtype']		= "html";
+	    $config['smtp_host']	= "ssl://smtp.gmail.com";//pengaturan smtp
+	    $config['smtp_port']	= "465";
+	    $config['smtp_timeout']	= "400";
+	    $config['smtp_user']	= $email_sender; // isi dengan email kamu
+	    $config['smtp_pass']	= $email_password; // isi dengan password kamu
+	    $config['crlf']			="\r\n"; 
+	    $config['newline']		="\r\n"; 
+	    $config['wordwrap'] 	= TRUE;
 	    //memanggil library email dan set konfigurasi untuk pengiriman email
 	   
 	    $this->email->initialize($config);

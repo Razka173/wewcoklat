@@ -11,6 +11,10 @@ class Google extends CI_Controller {
         
         // Load user model
         $this->load->model('google_user');
+        $this->load->model('pelanggan_model');
+
+        // Load Library
+        $this->load->library('simple_pelanggan');
 	}
 
 	public function index()
@@ -38,18 +42,18 @@ class Google extends CI_Controller {
                 // $userData['locale']         = !empty($gpInfo['locale'])?$gpInfo['locale']:'';
                 // $userData['link']           = !empty($gpInfo['link'])?$gpInfo['link']:'';
                 $userData['foto']               = !empty($gpInfo['picture'])?$gpInfo['picture']:'';
-                $userData['status_pelanggan']   = 'Member';
-                $userData['status_reseller']    = 'Tidak';
                 
                 // Insert or update user data to the database
                 $userID = $this->google_user->checkUser($userData);
                 
                 // Store the status and user profile info into session
-                $this->session->set_userdata('loggedIn', true);
-                $this->session->set_userdata('userData', $userData);
+                // $this->session->set_userdata('loggedIn', true);
+                // $this->session->set_userdata('userData', $userData);
+                $password="";
+                $this->simple_pelanggan->login($gpInfo['email'], $password);
                 
                 // Redirect to profile page
-                redirect(base_url('dasbor'));
+                redirect(base_url());
             }
 		} 
         

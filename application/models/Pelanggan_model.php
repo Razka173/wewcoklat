@@ -32,6 +32,19 @@ class Pelanggan_model extends CI_Model {
 		return $query->row();
 	}
 
+	// Login pelanggan via google
+	public function login_google($email)
+	{
+		$this->db->select('*');
+		$this->db->from('pelanggan');
+		$this->db->where(array( 'email' 			=> $email,
+								'oauth_provider'	=> 'google'	
+							));
+		$this->db->order_by('id_pelanggan', 'asc');
+		$query = $this->db->get();
+		return $query->row();
+	}
+
 	// Detail pelanggan
 	public function detail($id_pelanggan)
 	{

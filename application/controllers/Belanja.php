@@ -56,6 +56,8 @@ class Belanja extends CI_Controller {
 				$this->session->set_flashdata('sukses','Keranjang Belanja Kosong');
 				redirect(base_url('belanja'),'refresh');
 			}
+
+			// Cek apakah pelanggan sudah verifikasi email
 			if($pelanggan->status_pelanggan=='Pending'){
 				$this->session->set_flashdata('sukses','Anda Belum Memverifikasi Email Anda! Silahkan Verifikasi Email Anda Terlebih Dahulu');
 				redirect(base_url('belanja'),'refresh');
@@ -143,10 +145,11 @@ class Belanja extends CI_Controller {
 			$email 				= $this->session->userdata('email');
 			$nama_pelanggan		= $this->session->userdata('nama_pelanggan');
 			$pelanggan 			= $this->pelanggan_model->sudah_login($email, $nama_pelanggan);
+			if($pelanggan->status_pelanggan=='Reseller'){
+				$price 	= $this->input->post('price')-4000;
+			}
 		}
-		if($pelanggan->status_pelanggan=='Reseller'){
-			$price 		= $this->input->post('price')-4000;
-		}
+
 		$name 			= $this->input->post('name');
 		$redirect_page 	= $this->input->post('redirect_page');
 		// Proses memasukkan ke keranjang belanja
@@ -165,11 +168,16 @@ class Belanja extends CI_Controller {
 	{
 		// Jika ada data rowid
 		if($rowid) {
+			$jumlah_produk = $this->input->post('qty');
+			if($jumlah_produk>120){
+				$this->session->set_flashdata('sukses', 'Silahkan menghubungi CS untuk pembelian dalam jumlah yang banyak.');
+				redirect(base_url('belanja'),'refresh');
+			}
 			$data = array(	'rowid'		=> $rowid,
 							'qty'		=> $this->input->post('qty')
 						);
 			$this->cart->update($data);
-			$this->session->flashdata('sukses', 'Data keranjang telah diupdate');
+			$this->session->set_flashdata('sukses', 'Data keranjang telah diupdate');
 			redirect(base_url('belanja'),'refresh');
 		}else{
 			// Jika ga ada row id

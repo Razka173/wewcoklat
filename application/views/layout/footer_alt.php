@@ -7,139 +7,88 @@ $nav_produk_footer 	= $this->konfigurasi_model->nav_produk();
 	.wew-footer{
 		background-color: rgb(129, 58, 0);
 	}
+	.wew-footer-area{
+		margin-bottom: 30;
+		padding: 70px 0px;
+		background-color: rgb(129, 58, 0);
+	}
+	.wew-copyright div, i, a{
+		color: white;
+		font-size: 15px;
+	}
+	.wew-widget h4, p{
+		color: white;
+	}
 </style>
-	<!--============================================ FOOTER ===============================================-->
-	<footer class="p-t-45 p-b-43 p-l-45 p-r-45 wew-footer">
-		<div class="flex-w p-b-90">
-			<div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
-				<h4 class="s-text12 p-b-30">
-					KONTAK KAMI
-				</h4>
-
-				<div>
-					<p class="s-text7 w-size27">
-						<?php echo nl2br($site->alamat) ?>
-						<br><i class="fa fa-envelope"></i> <?php echo $site->email?>
-						<br><i class="fa fa-phone"></i> <?php echo $site->telepon?>
-					</p>
-
-					<div class="flex-m p-t-30">
-						<a href="<?php echo $site->facebook ?>" class="fs-18 color1 p-r-20 fa fa-shopping-cart"></a>
-						<a href="<?php echo $site->instagram ?>" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
-					</div>
-				</div>
-			</div>
-
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Kategori Produk
-				</h4>
-
-				<ul>
-					<?php foreach($nav_produk_footer as $nav_produk_footer) { ?>
-					<li class="p-b-9">
-						<a href="<?php echo base_url('produk/kategori/'.$nav_produk_footer->slug_kategori) ?>" class="s-text7">
-							<?php echo $nav_produk_footer->nama_kategori ?>
-						</a>
-					</li>
-					<?php } ?>
+<!--============================================ FOOTER ===============================================-->
+	<footer class="footer wew-footer">
+		<div class="footer-area wew-footer-area">
+			<div class="container">
+				<div class="row section_gap">
 					
-				</ul>
-			</div>
-
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Links
-				</h4>
-
-				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Search
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							About Us
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Contact Us
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Help
-				</h4>
-
-				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Track Order
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Shipping
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							FAQs
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
-				<h4 class="s-text12 p-b-30">
-					Newsletter
-				</h4>
-
-				<form>
-					<div class="effect1 w-size9">
-						<input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com">
-						<span class="effect1-line"></span>
+					<div class="col-lg-4 mb-3">
+						<div class="wew-widget">
+							<h4 class="footer_title mb-3">Guys...</h5>
+							<p>
+								Banyak tugas, kegiatan, beribadah dan deadline adalah faktor pewarna dalam timeline hidup kita. Tapi diantara padatnya aktivitas, ada kalanya kita sebagai human general butuh kesunyian, kesendirian, pelukan hangat dari yang terkasih dan penyejuk hati.
+							</p>
+							<p>
+	            				Cobalah coklat dari <strong>WewCoklat</strong>, Karena dekapan tulus hanya dari <strong>Wew</strong>.
+							</p>
+						</div>
 					</div>
 
-					<div class="w-size2 p-t-20">
-						<!-- Button -->
-						<button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-							Subscribe
-						</button>
+					<div class="col-lg-4 mb-3">
+						<div class="wew-widget">
+							<h4 class="footer_title mb-3">Links</h4>
+							<ul class="list text-center text-white">
+				            <div class="p-3 mb-3 bg-danger"><li><span class="fa fa-shopping-bag text-light"></span> <a href="https://shopee.co.id/faqihalfarisi17">Buy on Shopee</a></li></div>
+				            <div class="p-3 mb-3 bg-primary"><li><span class="fa fa-instagram text-light"></span> <a href="https://instagram.com/wewcoklat">Follow us on Instagram</a></li></div>
+				            <div class="p-3 mb-3 bg-success"><li><span class="fa fa-whatsapp text-light"></span> <a href="wa.me/6283870819680">Contact Us on WhatsApp</a></li></div>
+							</ul>
+						</div>
 					</div>
 
-				</form>
+					<div class="col-lg-4 mb-3">
+						<div class="wew-widget">
+							<h4 class="footer_title mb-3">Contact Us</h4>
+							<div class="ml-40">
+								<p class="sm-head">
+									<span class="fa fa-location-arrow"></span>
+									Head Office
+								</p>
+								<p>Jl. Malaka RT3/4 Cilangkap, Jakarta Timur</p>
+								<p class="sm-head">
+									<span class="fa fa-phone"></span>
+									Phone Number
+								</p>
+								<p>
+									+62 828 7081 9680
+								</p>
+								<p class="sm-head">
+									<span class="fa fa-envelope"></span>
+									Email
+								</p>
+								<p>
+									wewcokelat@gmail.com <br>
+									www.wewcoklat.com
+								</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
 			</div>
 		</div>
 
-		<div class="t-center p-l-15 p-r-15">
-			<div class="t-center s-text8 p-t-20">
+		<!-- COPYRIGHT TEMPLATE -->
+		<div class="t-center p-l-15 p-r-15 wew-copyright">
+			<div class="t-center s-text8 p-t-20 p-b-20">
 				Copyright © 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 			</div>
 		</div>
 	</footer>
-	<!--========================================= END FOOTER ========================================-->
+<!--========================================= END FOOTER ========================================-->
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top bg0-hov" id="myBtn">

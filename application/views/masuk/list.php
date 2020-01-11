@@ -55,10 +55,10 @@
 
 		<!-- Login dengan Google -->
 		<div class="row text-center social-btn justify-content-center border border-warning">
-			<div class="col-3">
+			<div class="col-md-3">
 		    	<a href="<?php echo base_url('google') ?>" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Masuk dengan <b>Google</b></a>
 		    </div>
-			<div class="col-3">
+			<div class="col-md-3">
 		    	<a href="#" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Masuk dengan <b>Facebook</b></a>	
 		    </div>
 		</div>
@@ -67,31 +67,35 @@
 		<!-- USERNAME -->
 		<div>
 		<div class="row justify-content-center pb-2">
-			<div class="col-2">
-					Email (username)
+			<div class="col-md-2">
+				<label for="email">Email (username)</label>
 			</div>
-			<div class="col-3" style="border: 1px solid black; border-radius: 20px;">
-				<input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo set_value('email') ?>" required>
+			<div class="col-md-3" style="border: 1px solid black; border-radius: 20px;">
+				<input id="email" type="email" name="email" class="form-control" placeholder="Email" value="<?php echo set_value('email') ?>" required>
 			</div>
 		</div>
 		
 		<!-- PASSWORD -->
 		<div class="row justify-content-center">
-			<div class="col-2">
-					Password
+			<div class="col-md-2">
+				<label for="password">Password</label>
 			</div>
-			<div class="col-3" style="border: 1px solid black; border-radius: 20px;">
-				<input type="password" name="password" class="form-control" placeholder="Password" value="<?php echo set_value('password') ?>" required>
+			<div class="col-md-3" style="border: 1px solid black; border-radius: 20px;">
+				<input id="password" type="password" name="password" class="form-control" placeholder="Password" value="<?php echo set_value('password') ?>" required>
 			</div>
 		</div>
 		<br>
 		<div class="row justify-content-center">
-			<button class="btn btn-success btn-lg" type="submit">
-				<i class="fa fa-save"></i> Login
-			</button>
-			<button class="btn btn-default btn-lg" type="reset">
-				<i class="fa fa-times"></i> Reset
-			</button>
+			<div class="col-md-2">
+				<button class="btn btn-success btn-lg" type="submit">
+					<i class="fa fa-save"></i> Login
+				</button>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-default btn-lg" type="reset">
+					<i class="fa fa-times"></i> Reset
+				</button>
+			</div>
 		</div>
 		</div>
 		

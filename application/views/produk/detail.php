@@ -134,13 +134,13 @@
 			?>
 				<!-- Block2 -->
 				<div class="block2">
-					<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+					<div class="block2-img wrap-pic-w of-hidden pos-relative">
 						<img src="<?php echo base_url('assets/upload/image/'.$produk_related->gambar) ?>" alt="<?php echo $produk_related->nama_produk ?>">
 
 						<div class="block2-overlay trans-0-4">
-							<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-								<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-								<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+							<a href="<?php echo base_url('produk/detail/'.$produk->slug_produk) ?>" class="block2-btn-addwishlist hov-pointer trans-0-4">
+								<i class="fa fa-eye" aria-hidden="true"></i>
+								<!-- <i class="fa fa-eye dis-none" aria-hidden="true"></i> -->
 							</a>
 
 							<div class="block2-btn-addcart w-size1 trans-0-4">

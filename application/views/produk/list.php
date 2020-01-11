@@ -1,12 +1,12 @@
 <!-- Title Page -->
 <!-- url(php echo base_url() ?>assets/template/images/heading-pages-02.jpg); -->
-<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background: url(<?php echo base_url('assets/upload/image/'.$site->slider_other_gambar) ?>) rgba(0, 0, 0, 0.5); background-size: cover; background-position: 0 -30px; background-blend-mode: multiply;">
-<h2 class="l-text2 t-center">
-	<?php echo $title ?>
-</h2>
-<p class="m-text13 t-center">
-	<?php echo $site->namaweb ?> | <?php echo $site->tagline ?>
-</p>
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background: url(<?php echo base_url('assets/upload/image/'.$site->slider_other_gambar) ?>) rgba(129,58,0, 0.8); background-size: cover; background-position: 0 -30px; background-blend-mode: multiply;">
+	<h2 class="l-text2 t-center">
+		<?php echo $title ?>
+	</h2>
+	<p class="m-text13 t-center">
+		<?php echo $site->namaweb ?> | <?php echo $site->tagline ?>
+	</p>
 </section>
 
 
@@ -29,16 +29,11 @@
 						</a>
 					</li>
 					<?php } ?>
-					
-				</ul>
-
-				
+				</ul>	
 			</div>
 		</div>
 
 		<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-			
-
 			<!-- Product -->
 			<div class="row">
 				<?php foreach($produk as $produk) { ?>
@@ -56,13 +51,13 @@
 					?>
 					<!-- Block2 -->
 					<div class="block2">
-						<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+						<div class="block2-img wrap-pic-w of-hidden pos-relative">
 							<img src="<?php echo base_url('assets/upload/image/thumbs/'.$produk->gambar) ?>" alt="<?php echo $produk->nama_produk ?>">
 
 							<div class="block2-overlay trans-0-4">
-								<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+								<a href="<?php echo base_url('produk/detail/'.$produk->slug_produk) ?>" class="block2-btn-addwishlist hov-pointer trans-0-4">
 									<i class="fa fa-eye" aria-hidden="true"></i>
-									<i class="fa fa-eye dis-none" aria-hidden="true"></i>
+									<!-- <i class="fa fa-eye dis-none" aria-hidden="true"></i> -->
 								</a>
 
 								<div class="block2-btn-addcart w-size1 trans-0-4">
@@ -90,9 +85,7 @@
 					?>
 				</div>
 				<?php } ?>
-				
 			</div>
-
 			<!-- Pagination -->
 			<div class="pagination flex-m flex-w p-t-26 text-center">
 				<?php echo $pagin; ?>

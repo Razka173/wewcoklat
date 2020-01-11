@@ -34,8 +34,10 @@ class Google_user extends CI_Model {
             $userID = $result['id_pelanggan'];
         }else{
             // Insert user data
-            $data['tanggal_daftar'] = date("Y-m-d H:i:s");
-            $data['tanggal_update'] = date("Y-m-d H:i:s");
+            $data['tanggal_daftar']     = date("Y-m-d H:i:s");
+            $data['tanggal_update']     = date("Y-m-d H:i:s");
+            $data['status_pelanggan']   = 'Member';
+            $data['status_reseller']    = 'Tidak';
             $insert = $this->db->insert($this->tableName, $data);
             
             // user id

@@ -1,11 +1,16 @@
 <?php  
-// Load slider
+// LOAD SLIDER
 include('slider.php');
-// load kategori/banner
+
+// LOAD KATEGORI
 // include('kategori.php');
-// load data produk
+
+// LOAD DATA PRODUK
 include('produk.php');
+
 // load berita
 // include('berita.php')
+
+// LOAD PROFILE 
 include('profile.php')
 ?>

@@ -68,6 +68,6 @@ $site 	= $this->konfigurasi_model->listing();
 		background-color: black;
 	}
 </style>
-
 </head>
+
 <body class="animsition">

@@ -9,7 +9,8 @@
 	<hr>
 	<div class="clearfix"></div>
 	<br><br>
-
+	
+	<!-- NOTIFIKASI SUKSES -->
 	<?php if($this->session->flashdata('sukses')) {
 		echo '<div class="alert alert-warning">';
 		echo $this->session->flashdata('sukses');
@@ -46,32 +47,13 @@
 			</td>
 			<td class="text-center"><?php echo $keranjang['name'] ?></td>
 			<td class="text-center">Rp. <?php echo number_format($keranjang['price'],'0',',','.') ?></td>
-			<td class="text-center"><?php echo $keranjang['qty'] ?>
-				<!-- <div class="flex-w bo5 of-hidden w-size17"> -->
-					<!-- <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-						<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-					</button> -->
-			
-					<!-- <input class="size8 m-text18 t-center num-product" type="number" name="qty" value="<?php echo $keranjang['qty'] ?>"> -->
-
-					<!-- <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-						<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-					</button> -->
-				<!-- </div> -->
-			</td>
+			<td class="text-center"><?php echo $keranjang['qty'] ?></td>
 			<td class="text-center">Rp. 
 				<?php $sub_total = $keranjang['price'] * $keranjang['qty'];
 				echo number_format($sub_total,'0',',','.');
 				 ?>
 			</td>
 			<td class="text-center">
-				<!-- <button type="submit" name="update" class="btn btn-success btn-sm">
-					<i class="fa fa-edit"></i> Update
-				</button> -->
-
-				<!-- <a href="" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal<?php echo $keranjang['rowid']?>">
-    				<i class="fa fa-trash"></i> Edit
-  				</a> -->
   				<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal<?php echo $keranjang['rowid']?>">
   					<i class="fa fa-trash"></i> Edit
 				</button>
@@ -138,15 +120,6 @@
 		</a>
 	</p>
 </div>
-</div>
-
-<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
-	<div class="flex-w flex-m w-full-sm">
-	</div>
-
-	<div class="size10 trans-0-4 m-t-10 m-b-10">
-	<!-- Button -->
-	</div>
 </div>
 
 </div>

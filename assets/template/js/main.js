@@ -151,12 +151,12 @@
 
     /*[ Block2 button wishlist ]
     ===========================================================*/
-    $('.block2-btn-addwishlist').on('click', function(e){
-        e.preventDefault();
-        $(this).addClass('block2-btn-towishlist');
-        $(this).removeClass('block2-btn-addwishlist');
-        $(this).off('click');
-    });
+    // $('.block2-btn-addwishlist').on('click', function(e){
+    //     e.preventDefault();
+    //     $(this).addClass('block2-btn-towishlist');
+    //     $(this).removeClass('block2-btn-addwishlist');
+    //     $(this).off('click');
+    // });
 
     /*[ +/- num product ]
     ===========================================================*/

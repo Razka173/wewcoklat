@@ -16,6 +16,7 @@ class Simple_pelanggan
 	public function login($email, $password)
 	{
 		$check = $this->CI->pelanggan_model->login($email, $password);
+		$second_check = $this->CI->pelanggan_model->login_google($email);
 		// Jika ada data user, maka create session login
 		if($check) {
 			$id_pelanggan	= $check->id_pelanggan;
@@ -24,9 +25,18 @@ class Simple_pelanggan
 			$this->CI->session->set_userdata('id_pelanggan',$id_pelanggan);
 			$this->CI->session->set_userdata('nama_pelanggan',$nama_pelanggan);
 			$this->CI->session->set_userdata('email',$email);
-			// redirect ke halaman admin yang diproteksi
+			// redirect ke halaman yang diproteksi
 			redirect(base_url('dasbor'),'refresh');
-		}else{
+		} elseif($second_check) {
+			$id_pelanggan	= $second_check->id_pelanggan;
+			$nama_pelanggan	= $second_check->nama_pelanggan;
+			// Create session
+			$this->CI->session->set_userdata('id_pelanggan',$id_pelanggan);
+			$this->CI->session->set_userdata('nama_pelanggan',$nama_pelanggan);
+			$this->CI->session->set_userdata('email',$email);
+			// redirect ke halaman yang diproteksi
+			redirect(base_url('dasbor'),'refresh');
+		} else {
 			// Kalau tidak ada (username password salah), maka suruh login lagi
 			$this->CI->session->set_flashdata('warning', 'Username atau password salah');
 			redirect(base_url('masuk'),'refresh');
