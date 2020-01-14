@@ -11,6 +11,7 @@ class Dasbor extends CI_Controller {
 		$this->load->model('header_transaksi_model');
 		$this->load->model('transaksi_model');
 		$this->load->model('rekening_model');
+		$this->load->model('rekening_pelanggan_model');
 		// Halaman ini diproteksi dengan Simple_pelanggan => Check login
 		$this->simple_pelanggan->cek_login();
 	}
@@ -204,7 +205,7 @@ class Dasbor extends CI_Controller {
 							'nama_bank'				=> $i->post('nama_bank'),
 						);
 			$this->header_transaksi_model->edit($data);
-			$this->session->set_flashdata('sukses', 'Konfirmasi Pembayaran Berhasil');
+			$this->session->set_flashdata('sukses', 'Unggah Bukti Pembayaran Berhasil, Silahkan Menunggu Untuk Konfirmasi Bukti Bayar');
 			redirect(base_url('dasbor'),'refresh');
 		}}else{
 			// Edit produk tanpa ganti gambar
@@ -216,7 +217,7 @@ class Dasbor extends CI_Controller {
 							'jumlah_bayar'			=> $i->post('jumlah_bayar'),
 							'rekening_pembayaran'	=> $i->post('rekening_pembayaran'),
 							'rekening_pelanggan'	=> $i->post('rekening_pelanggan'),
-							// 'bukti_bayar'			=> $upload_gambar['upload_data']['file_name'],
+							// 'bukti_bayar'		=> $upload_gambar['upload_data']['file_name'],
 							'id_rekening'			=> $i->post('id_rekening'),
 							'tanggal_bayar'			=> $i->post('tanggal_bayar'),
 							'nama_bank'				=> $i->post('nama_bank'),
@@ -231,6 +232,21 @@ class Dasbor extends CI_Controller {
 						'rekening'			=> $rekening,
 						'isi'				=> 'dasbor/konfirmasi'
 						);
+		$this->load->view('layout/wrapper', $data, FALSE);
+	}
+
+	// Halaman Rekening Pelanggan
+	public function rekening(){
+		// Ambil data login id_pelanggan dari SESSION
+		$id_pelanggan		= $this->session->userdata('id_pelanggan');
+		$pelanggan 			= $this->pelanggan_model->detail($id_pelanggan);
+		$rekening_pelanggan = $this->rekening_pelanggan_model->pelanggan($id_pelanggan);
+
+		$data = array(	'title'					=> 'Halaman Rekening Bank Pelanggan',
+						'rekening_pelanggan'	=> $rekening_pelanggan,
+						'pelanggan'				=> $pelanggan,
+						'isi'					=> 'dasbor/rekening'
+					);
 		$this->load->view('layout/wrapper', $data, FALSE);
 	}
 }

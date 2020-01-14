@@ -89,27 +89,34 @@ class Registrasi extends CI_Controller {
 	}
 
 	// Kirim Email
-	public function kirim_email($encrypted_id, $subject)
+	private function kirim_email($encrypted_id, $subject)
 	{
-		$email_sender 	= "wewcokelat@gmail.com";
-		$email_password	= "!bismillah";
+		// $email_sender 	= "wewcoklat.noreply@gmail.com";
+		// $email_password	= "coklatenak";
+		// $smtp_host 		= "ssl://smtp.gmail.com";
+
+		$this->config->load('wew_email', TRUE);
+		$smtp_host = $this->config->item('smtp_host', 'wew_email');
+		$smtp_user = $this->config->item('smtp_user', 'wew_email');
+		$smtp_pass = $this->config->item('smtp_pass', 'wew_email');
 
 		// Verifikasi Email Pelanggan
 		$this->load->library('email');
+
 	    $config = array();
+	    $config['smtp_host']	= $smtp_host; // Pengaturan SMTP
+	    $config['smtp_user']	= $smtp_user; // isi dengan email kamu
+	    $config['smtp_pass']	= $smtp_pass; // isi dengan password kamu
 	    $config['charset'] 		= 'utf-8';
 	    $config['useragent'] 	= 'Codeigniter';
 	    $config['protocol']		= "smtp";
 	    $config['mailtype']		= "html";
-	    $config['smtp_host']	= "ssl://smtp.gmail.com";//pengaturan smtp
 	    $config['smtp_port']	= "465";
 	    $config['smtp_timeout']	= "400";
-	    $config['smtp_user']	= $email_sender; // isi dengan email kamu
-	    $config['smtp_pass']	= $email_password; // isi dengan password kamu
 	    $config['crlf']			="\r\n"; 
 	    $config['newline']		="\r\n"; 
 	    $config['wordwrap'] 	= TRUE;
-	    //memanggil library email dan set konfigurasi untuk pengiriman email
+	    // memanggil library email dan set konfigurasi untuk pengiriman email
 	   
 	    $this->email->initialize($config);
 	    //konfigurasi pengiriman
@@ -120,6 +127,12 @@ class Registrasi extends CI_Controller {
 	     "Terimakasih telah melakukan registrasi di website WEW COKLAT, untuk memverifikasi silahkan klik tautan dibawah ini<br><br>".
 	      base_url("registrasi/verifikasi/$encrypted_id")
 	    );
+	    if($this->email->send()){
+	    	return true;
+	    }else{
+	    	echo $this->email->print_debugger();
+	    	die;
+	    }
 	    return $this->email->send();
 	}
 }

@@ -309,7 +309,6 @@ class Produk extends CI_Controller {
 		$this->produk_model->delete($data);
 		$this->session->set_flashdata('sukses', 'Data telah dihapus');
 		redirect(base_url('admin/produk'),'refresh');
-		
 	}
 
 	// Delete gambar produk

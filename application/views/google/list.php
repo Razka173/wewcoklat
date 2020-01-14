@@ -1,5 +1,5 @@
 <head>
-  <meta http-equiv='refresh' content='2; URL=<?php echo $loginURL; ?>'>
+  <meta http-equiv='refresh' content='0; URL=<?php echo $loginURL; ?>'>
 </head>
 
 <body>

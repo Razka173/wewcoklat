@@ -5,19 +5,32 @@ $nav_produk_footer 	= $this->konfigurasi_model->nav_produk();
 ?>
 <style type="text/css" media="screen">
 	.wew-footer{
-		background-color: rgb(129, 58, 0);
+		background-color: rgb(77, 34, 0);
 	}
 	.wew-footer-area{
 		margin-bottom: 30;
 		padding: 70px 0px;
 		background-color: rgb(129, 58, 0);
 	}
-	.wew-copyright div, i, a{
+	.wew-widget i, .wew-widget a{
 		color: white;
-		font-size: 15px;
+		font-size: 14px;
 	}
-	.wew-widget h4, p{
+	.wew-widget h4, .wew-widget p{
 		color: white;
+	}
+	.wew-widget a{
+		border-radius: 30px;
+	}
+	.wew-copyright div, .wew-copyright a{
+		color: white;
+		font-size: 15px
+	}
+	.wew-instagram{
+		background-color: rgb(122, 46, 234);
+	}
+	.wew-instagram:hover{
+		background-color: rgb(106, 22, 233);
 	}
 </style>
 <!--============================================ FOOTER ===============================================-->
@@ -26,7 +39,7 @@ $nav_produk_footer 	= $this->konfigurasi_model->nav_produk();
 			<div class="container">
 				<div class="row section_gap">
 					
-					<div class="col-lg-4 mb-3">
+					<div class="col-lg-6 mb-3">
 						<div class="wew-widget">
 							<h4 class="footer_title mb-3">Guys...</h5>
 							<p>
@@ -38,45 +51,57 @@ $nav_produk_footer 	= $this->konfigurasi_model->nav_produk();
 						</div>
 					</div>
 
-					<div class="col-lg-4 mb-3">
+					<div class="col-lg-3 mb-3">
 						<div class="wew-widget">
 							<h4 class="footer_title mb-3">Links</h4>
-							<ul class="list text-center text-white">
-				            <div class="p-3 mb-3 bg-danger"><li><span class="fa fa-shopping-bag text-light"></span> <a href="https://shopee.co.id/faqihalfarisi17">Buy on Shopee</a></li></div>
-				            <div class="p-3 mb-3 bg-primary"><li><span class="fa fa-instagram text-light"></span> <a href="https://instagram.com/wewcoklat">Follow us on Instagram</a></li></div>
-				            <div class="p-3 mb-3 bg-success"><li><span class="fa fa-whatsapp text-light"></span> <a href="wa.me/6283870819680">Contact Us on WhatsApp</a></li></div>
-							</ul>
+							<a class="p-3 mb-3 btn btn-danger col-lg-12" href="https://shopee.co.id/faqihalfarisi17" target="_blank">
+								<i class="fa fa-shopping-bag"></i> Buy on Shopee
+							</a>
+							<a class="p-3 mb-3 btn col-lg-12 wew-instagram" href="https://instagram.com/wewcoklat" target="_blank">
+								<i class="fa fa-instagram"></i> Follow us on Instagram
+							</a>
+							<a class="p-3 mb-3 btn btn-success col-lg-12" href="https://wa.me/6283870819680" target="_blank">
+								<i class="fa fa-whatsapp"></i> Contact us on WhatsApp
+							</a>	
 						</div>
 					</div>
 
-					<div class="col-lg-4 mb-3">
+					<div class="col-lg-3 mb-3">
 						<div class="wew-widget">
 							<h4 class="footer_title mb-3">Contact Us</h4>
-							<div class="ml-40">
-								<p class="sm-head">
-									<span class="fa fa-location-arrow"></span>
-									Head Office
-								</p>
-								<p>Jl. Malaka RT3/4 Cilangkap, Jakarta Timur</p>
-								<p class="sm-head">
-									<span class="fa fa-phone"></span>
-									Phone Number
-								</p>
-								<p>
-									+62 828 7081 9680
-								</p>
-								<p class="sm-head">
-									<span class="fa fa-envelope"></span>
-									Email
-								</p>
-								<p>
-									wewcokelat@gmail.com <br>
-									www.wewcoklat.com
-								</p>
+							<!-- HEAD OFFICE -->
+							<div class="ml-40 row mb-3">
+								<div class="col-md-2">
+									<span class="btn btn-warning rounded-circle"><i class="fa fa-location-arrow"></i></span>
+								</div>
+								<div class="col-md-10">
+									<p><strong>Head Office</strong></p>
+									<p>Malaka RT3/4 Cilangkap, Jakarta Timur</p>
+								</div>
 							</div>
+							<!-- PHONE NUMBER -->
+							<div class="ml-40 row mb-3">
+								<div class="col-md-2">
+									<span class="btn btn-warning rounded-circle"><i class="fa fa-phone"></i></span>
+								</div>
+								<div class="col-md-10">
+									<p><strong>Phone Number</strong></p>
+									<p>+62 828 7081 9680</p>
+								</div>
+							</div>
+							<!-- EMAIL -->
+							<div class="ml-40 row mb-1">
+								<div class="col-md-2">
+									<span class="btn btn-warning rounded-circle"><i class="fa fa-envelope"></i></span>
+								</div>
+								<div class="col-md-10">
+									<p><strong>Email</strong></p>
+									<p>wewcokelat@gmail.com <br>
+									www.wewcoklat.com</p>
+								</div>
+							</div>		
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>

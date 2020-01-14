@@ -3,6 +3,9 @@
 $nav_produk			= $this->konfigurasi_model->nav_produk();
 $nav_produk_mobile	= $this->konfigurasi_model->nav_produk();
 ?>
+<style>
+	
+</style>
 <div class="wrap_header">
 	<!-- Logo -->
 	<a href="<?php echo base_url() ?>" class="logo">
@@ -31,7 +34,7 @@ $nav_produk_mobile	= $this->konfigurasi_model->nav_produk();
 				</li>
 
 				<li>
-					<a href="<?php echo base_url('kontak') ?>">Contact</a>
+					<a href="<?php echo base_url('kontak') ?>">Kontak</a>
 				</li>
 			</ul>
 		</nav>
@@ -50,11 +53,6 @@ $nav_produk_mobile	= $this->konfigurasi_model->nav_produk();
 			</a>
 
 		<?php }else{ ?>
-			<!-- <a href="<?php echo base_url('registrasi') ?>" class="header-wrapicon1 dis-block">
-				<img src="<?php echo base_url() ?>assets/template/images//icons/icon-header-01.png" class="header-icon1" alt="ICON">	
-			</a> -->
-
-			<!-- <span class="linedivide1"></span> -->
 
 			<a href="<?php echo base_url('masuk') ?>" class="header-wrapicon1 dis-block">
 				<div class="btn btn-sm m-r-5" style="border-radius: 50px; padding: 5px 20px; background-color: white; color: #783C00; border-color:#783C00; ">Login</div>
@@ -301,7 +299,7 @@ $nav_produk_mobile	= $this->konfigurasi_model->nav_produk();
 
 		<!-- menu kontak mobile -->
 		<li class="item-menu-mobile">
-			<a href="<?php echo base_url('kontak') ?>">Contact</a>
+			<a href="<?php echo base_url('kontak') ?>">Kontak</a>
 		</li>
 	</ul>
 </nav>

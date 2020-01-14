@@ -49,13 +49,14 @@ class User extends CI_Controller {
 					'min_length'	=> '%s minimal 6 karakter'));
 
 		if($valid->run()===FALSE) {
-		// End validasi
-		$data = array(	'title' 	=> 'Tambah Pengguna',
-						'isi'		=> 'admin/user/tambah'
-					);
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
-		// Masuk database
+			// End validasi
+			$data = array(	'title' 	=> 'Tambah Pengguna',
+							'isi'		=> 'admin/user/tambah'
+						);
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		
 		}else{
+			// Masuk database
 			$i = $this->input;
 			$data = array(	'nama'			=> $i->post('nama'),
 							'email'			=> $i->post('email'),
@@ -90,15 +91,15 @@ class User extends CI_Controller {
 					'min_length'	=> '%s minimal 6 karakter'));
 
 		if($valid->run()===FALSE) {
-		// End validasi
-
-		$data = array(	'title' 	=> 'Edit Pengguna',
-						'user'		=> $user,
-						'isi'		=> 'admin/user/edit',
-					);
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
-		// Masuk database
+			// End validasi
+			$data = array(	'title' 	=> 'Edit Pengguna',
+							'user'		=> $user,
+							'isi'		=> 'admin/user/edit',
+						);
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		
 		}else{
+			// Masuk database
 			$i = $this->input;
 			$data = array(	'id_user'		=> $id_user,
 							'nama'			=> $i->post('nama'),
@@ -124,7 +125,6 @@ class User extends CI_Controller {
 		}
 		$this->session->set_flashdata('sukses', 'Data telah dihapus');
 		redirect(base_url('admin/user'),'refresh');
-		
 	}
 
 }

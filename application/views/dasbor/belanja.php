@@ -1,4 +1,16 @@
 <!-- Content page -->
+<style>
+	.dasbor-pelanggan th{
+		font-size: 12px !important;
+		text-align: center;
+	}
+	.dasbor-pelanggan td{
+		font-size: 14px;
+	}
+	.wew-table{
+		overflow-x: auto;
+	}
+</style>
 <section class="bgwhite p-t-55 p-b-65">
 <div class="container">
 	<div class="row">
@@ -9,7 +21,7 @@
 			</div>
 		</div>
 
-		<div class="col-sm-6 col-md-9 col-lg-9 p-b-50">
+		<div class="col-sm-6 col-md-9 col-lg-9 p-b-50 wew-table">
 
 				<h2><?php echo $title ?></h2>
 				<hr>
@@ -20,14 +32,14 @@
 			if($header_transaksi) { 
 			?>
 
-			<table class="table table-bordered" width="100%">
+			<table class="table table-bordered dasbor-pelanggan" width="100%">
 				<thead>
 					<tr class="bg-success">
 						<th>NO</th>
 						<th>KODE</th>
-						<th>TANGGAL</th>
+						<th width="14%">TANGGAL</th>
 						<th>JUMLAH TOTAL</th>
-						<th>JUMLAH ITEM</th>
+						<th width="10%">JUMLAH ITEM</th>
 						<th>STATUS BAYAR</th>
 						<th>ACTION</th>
 					</tr>
@@ -37,7 +49,7 @@
 					<tr>
 						<td><?php echo $i ?></td>
 						<td><?php echo $header_transaksi->kode_transaksi ?></td>
-						<td><?php echo date('d-m-Y',strtotime($header_transaksi->tanggal_transaksi))?></td>
+						<td><?php echo date('d-M-Y',strtotime($header_transaksi->tanggal_transaksi))?></td>
 						<td><?php echo number_format($header_transaksi->jumlah_transaksi) ?></td>
 						<td><?php echo $header_transaksi->total_item ?></td>
 						<td><?php echo $header_transaksi->status_bayar ?></td>
