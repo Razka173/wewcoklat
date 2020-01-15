@@ -36,6 +36,8 @@ class Rekening extends CI_Controller {
 		$this->session->set_flashdata('sukses', 'Data Rekening berhasil dihapus');
 		redirect(base_url('dasbor/rekening'), 'refresh');
 	}
+
+	// Tambah Rekening
 }
 
 /* End of file Rekening.php */

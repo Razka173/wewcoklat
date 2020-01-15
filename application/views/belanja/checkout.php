@@ -55,7 +55,7 @@
 			</td>
 			<td class="text-center">
   				<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal<?php echo $keranjang['rowid']?>">
-  					<i class="fa fa-trash"></i> Edit
+  					<i class="fa fa-edit"></i> Edit
 				</button>
 
 				<a href="<?php echo base_url('belanja/hapus/'.$keranjang['rowid']) ?>" class="btn btn-warning btn-sm">
@@ -104,9 +104,11 @@
 		// End loopinng keranjang belanja
 		}
 		?>
-		<tr class="table-row bg-info text-strong" style="font-weight: bold; color: white !important;">
-			<td colspan="4" class="column-1">Total Belanja</td>
-			<td colspan="2" class="column-2">Rp. <?php echo number_format($this->cart->total(),'0',',','.') ?></td>
+		<tr class="table-row bg-primary text-strong" style="font-weight: bold; color: white;">
+			<td colspan="3" class="text-center text-white">Total Belanja</td>
+			<td></td>
+			<td colspan="1" class="text-center text-white">Rp. <?php echo number_format($this->cart->total(),'0',',','.') ?></td>
+			<td></td>
 		</tr>
 		
 	</table>
@@ -122,25 +124,25 @@
 			<thead>
 				<tr>
 					<th width="25%">Kode Transaksi</th>
-					<th><input type="text" name="kode_transaksi" class="form-control" value="<?php echo $kode_transaksi ?>" readonly required></th>
+					<th><input type="text" name="kode_transaksi" class="form-control form-control-success" value="<?php echo $kode_transaksi ?>" readonly required></th>
 				</tr>
 				<tr>
 					<th width="25%">Nama Penerima</th>
-					<th><input type="text" name="nama_pelanggan" class="form-control" placeholder="Nama lengkap" value="<?php echo $pelanggan->nama_pelanggan ?>" required></th>
+					<th><input type="text" name="nama_pelanggan" class="form-control border border-dark" placeholder="Nama lengkap" value="<?php echo $pelanggan->nama_pelanggan ?>" required></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td>Email Penerima</td>
-					<td><input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo $pelanggan->email ?>" required></td>
+					<td><input type="email" name="email" class="form-control border border-dark" placeholder="Email" value="<?php echo $pelanggan->email ?>" required></td>
 				</tr>
 				<tr>
 					<td>Nomor HP</td>
-					<td><input type="text" name="telepon" class="form-control" placeholder="Masukan Nomor HP disini..." value="<?php echo $pelanggan->telepon ?>" required></td>
+					<td><input type="text" name="telepon" class="form-control border border-dark" placeholder="Masukan Nomor HP disini..." value="<?php echo $pelanggan->telepon ?>" required></td>
 				</tr>
 				<tr>
 					<td>Alamat Pengiriman</td>
-					<td><textarea name="alamat" class="form-control" placeholder="Masukan Alamat disini..."><?php echo $pelanggan->alamat ?></textarea></td>
+					<td><textarea name="alamat" class="form-control border border-dark" placeholder="Masukan Alamat disini..."><?php echo $pelanggan->alamat ?></textarea></td>
 				</tr>
 				<tr>
 					<td></td>

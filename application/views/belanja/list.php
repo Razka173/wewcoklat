@@ -55,7 +55,7 @@
 			</td>
 			<td class="text-center">
   				<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal<?php echo $keranjang['rowid']?>">
-  					<i class="fa fa-trash"></i> Edit
+  					<i class="fa fa-edit"></i> Edit
 				</button>
 
 				<a href="<?php echo base_url('belanja/hapus/'.$keranjang['rowid']) ?>" class="btn btn-warning btn-sm">
@@ -104,9 +104,11 @@
 		// End loopinng keranjang belanja
 		}
 		?>
-		<tr class="table-row bg-info text-strong" style="font-weight: bold; color: white !important;">
-			<td colspan="4" class="column-1">Total Belanja</td>
-			<td colspan="2" class="column-2">Rp. <?php echo number_format($this->cart->total(),'0',',','.') ?></td>
+		<tr class="table-row bg-primary text-strong" style="font-weight: bold; color: white;">
+			<td colspan="3" class="text-center text-white">Total Belanja</td>
+			<td></td>
+			<td colspan="1" class="text-center text-white">Rp. <?php echo number_format($this->cart->total(),'0',',','.') ?></td>
+			<td></td>
 		</tr>
 		
 	</table>

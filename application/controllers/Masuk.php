@@ -8,6 +8,7 @@ class Masuk extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('pelanggan_model');
+		$this->load->model('konfigurasi_model');
 	}
 
 	// Login pelanggan
@@ -28,10 +29,12 @@ class Masuk extends CI_Controller {
 			$this->simple_pelanggan->login($email, $password);
 		}
 		// End validasi
+		$site = $this->konfigurasi_model->listing();
 		$data = array(	'title'		=> 'Login Pelanggan',
-						'isi'		=> 'masuk/list'
+						'site'		=> $site,
+						'isi'		=> 'masuk/list_alt'
 					);
-		$this->load->view('layout/wrapper', $data, FALSE);
+		$this->load->view('layout/wrapper_login_page', $data, FALSE);
 	}
 
 	// Logout
