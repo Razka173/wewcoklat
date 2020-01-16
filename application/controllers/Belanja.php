@@ -129,7 +129,7 @@ class Belanja extends CI_Controller {
 		}else{
 			// Kalau belum, maka harus registrasi
 			$this->session->set_flashdata('sukses', 'Silahkan login atau registrasi terlebih dahulu');
-			redirect(base_url('registrasi'),'refresh');
+			redirect(base_url('masuk'),'refresh');
 		}
 	}
 

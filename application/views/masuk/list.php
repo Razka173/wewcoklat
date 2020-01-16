@@ -27,7 +27,8 @@
 		echo '<div class="alert alert-warning">';
 		echo $this->session->flashdata('sukses');
 		echo '</div>';
-	} ?>
+	} 
+	?>
 
 	<p class="alert alert-success">Belum memiliki akun? Silahkan <a href="<?php echo base_url('registrasi') ?>" class="btn btn-info btn-sm">Registrasi di sini</a></p>
 

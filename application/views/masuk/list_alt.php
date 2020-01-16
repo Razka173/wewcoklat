@@ -51,6 +51,12 @@
 					echo $this->session->flashdata('logout');
 					echo '</div>';
 				}
+				if($this->session->flashdata('sukses')) {
+					echo '<div class="alert alert-warning">';
+					echo $this->session->flashdata('sukses');
+					echo '</div>';
+				} 
+	
 				// form open
 				echo form_open(base_url('masuk'), 'class="leave-comment"'); 
 				?>

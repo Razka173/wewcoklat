@@ -1,4 +1,12 @@
 <section>
+<style>
+    @media (max-width: 768px) {
+        .container-kontak{
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+    }
+</style>
 <div class="container container-kontak m-t-100 m-b-150">
 
     <h2 class="mb-5"><?php echo $title ?></h2>

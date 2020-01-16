@@ -40,26 +40,18 @@
 				</tr>
 				<tr>
 					<td>Password</td>
-					<td><input type="password" name="password" class="form-control" placeholder="Password minimal 6 karakter" value="" required></td>
+					<td><input type="password" name="password" class="form-control" placeholder="Password (minimal 6 karakter)" value="" required></td>
 				</tr>
 				<tr>
 					<td>Konfirmasi Password</td>
 					<td><input type="password" name="cfpassword" class="form-control" placeholder="Konfirmasi password" value="" required></td>
 				</tr>
 				<tr>
-					<td>Telepon</td>
-					<td><input type="text" name="telepon" class="form-control" placeholder="Telepon" value="<?php echo set_value('telepon') ?>" required></td>
-				</tr>
-				<tr>
-					<td>Alamat</td>
-					<td><textarea name="alamat" class="form-control" placeholder="Alamat"><?php echo set_value('alamat') ?></textarea></td>
-				</tr>
-				<tr>
 					<td></td>
 					<td>
 						<select name="status_reseller" id="status" class="form-control" width="20%">
 							<option value="Tidak">Daftar menjadi Member</option>
-							<option value="Ya">Daftar menjadi Reseller</option>
+							<option value="Pending">Daftar menjadi Reseller</option>
 						</select>
 					</td>
 				</tr>

@@ -8,6 +8,7 @@ class Registrasi extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('pelanggan_model');
+		$this->load->model('konfigurasi_model');
 	}
 
 	// Halaman registrasi
@@ -34,11 +35,12 @@ class Registrasi extends CI_Controller {
 
 		if($valid->run()===FALSE) {
 		// End validasi
-
+		$site = $this->konfigurasi_model->listing();
 		$data = array(	'title'		=> 'Registrasi Pelanggan', 
-						'isi'		=> 'registrasi/list'
+						'site'		=> $site,
+						'isi'		=> 'registrasi/list_new'
 					);
-		$this->load->view('layout/wrapper', $data, FALSE);
+		$this->load->view('layout/wrapper_login_page', $data, FALSE);
 		// Masuk database
 		}else{
 			$i = $this->input;
@@ -46,8 +48,6 @@ class Registrasi extends CI_Controller {
 							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 							'email'				=> $i->post('email'),
 							'password'			=> SHA1($i->post('password')),
-							'telepon'			=> $i->post('telepon'),
-							'alamat'			=> $i->post('alamat'),
 							'status_reseller'	=> $i->post('status_reseller'),
 							'tanggal_daftar'	=> date('Y-m-d H:i:s')
 						);

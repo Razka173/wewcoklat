@@ -19,21 +19,29 @@ class Simple_pelanggan
 		$second_check = $this->CI->pelanggan_model->login_google($email);
 		// Jika ada data user, maka create session login
 		if($check) {
-			$id_pelanggan	= $check->id_pelanggan;
-			$nama_pelanggan	= $check->nama_pelanggan;
+			$id_pelanggan		= $check->id_pelanggan;
+			$nama_pelanggan		= $check->nama_pelanggan;
+			$status_pelanggan	= $check->status_pelanggan;
+			$status_reseller	= $check->status_reseller;
 			// Create session
 			$this->CI->session->set_userdata('id_pelanggan',$id_pelanggan);
 			$this->CI->session->set_userdata('nama_pelanggan',$nama_pelanggan);
 			$this->CI->session->set_userdata('email',$email);
+			$this->CI->session->set_userdata('status_pelanggan',$status_pelanggan);
+			$this->CI->session->set_userdata('status_reseller',$status_reseller);
 			// redirect ke halaman yang diproteksi
 			redirect(base_url('dasbor'),'refresh');
 		} elseif($second_check) {
-			$id_pelanggan	= $second_check->id_pelanggan;
-			$nama_pelanggan	= $second_check->nama_pelanggan;
+			$id_pelanggan		= $second_check->id_pelanggan;
+			$nama_pelanggan		= $second_check->nama_pelanggan;
+			$status_pelanggan	= $second_check->status_pelanggan;
+			$status_reseller	= $second_check->status_reseller;
 			// Create session
 			$this->CI->session->set_userdata('id_pelanggan',$id_pelanggan);
 			$this->CI->session->set_userdata('nama_pelanggan',$nama_pelanggan);
 			$this->CI->session->set_userdata('email',$email);
+			$this->CI->session->set_userdata('status_pelanggan',$status_pelanggan);
+			$this->CI->session->set_userdata('status_pelanggan',$status_reseller);
 			// redirect ke halaman yang diproteksi
 			redirect(base_url('dasbor'),'refresh');
 		} else {
