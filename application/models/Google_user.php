@@ -33,6 +33,11 @@ class Google_user extends CI_Model {
             // user id
             $userID = $result['id_pelanggan'];
         }else{
+            // Jika pelanggan sudah daftar di website tanpa menggunakan google login
+            if($this->checkEmail($data['email']) == true){
+                return false;
+            }
+            
             // Insert user data
             $data['tanggal_daftar']     = date("Y-m-d H:i:s");
             $data['tanggal_update']     = date("Y-m-d H:i:s");
@@ -46,6 +51,15 @@ class Google_user extends CI_Model {
         
         // Return user id
         return $userID?$userID:false;
+    }
+
+    public function checkEmail($email){
+        $this->db->select('*');
+        $this->db->from('pelanggan');
+        $this->db->where('email', $email);
+        $this->db->order_by('id_pelanggan', 'desc');
+        $query = $this->db->get();
+        return $query->row();
     }
 
 }

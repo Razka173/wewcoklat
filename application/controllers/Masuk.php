@@ -14,7 +14,6 @@ class Masuk extends CI_Controller {
 	// Login pelanggan
 	public function index()
 	{
-
 		// Validasi
 		$this->form_validation->set_rules('email','Email/username','required',
 			array(	'required'	=>	'%s harus diisi'));
@@ -30,7 +29,7 @@ class Masuk extends CI_Controller {
 		}
 		// End validasi
 		$site = $this->konfigurasi_model->listing();
-		$data = array(	'title'		=> 'Login Pelanggan',
+		$data = array(	'title'		=> 'Halaman Masuk',
 						'site'		=> $site,
 						'isi'		=> 'masuk/list_alt'
 					);

@@ -34,7 +34,7 @@ $nav_produk_mobile	= $this->konfigurasi_model->nav_produk();
 				</li>
 
 				<li>
-					<a href="<?php echo base_url('kontak') ?>">Kontak</a>
+					<a href="<?php echo base_url('kontak') ?>">Kontak Kami</a>
 				</li>
 			</ul>
 		</nav>

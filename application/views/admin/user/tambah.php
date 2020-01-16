@@ -3,7 +3,7 @@
 echo validation_errors('<div class="alert alert-warning">','</div>');
 
 // Form open
-echo form_open(base_url('admin/user/tambah'),' class="form-horizontal"');
+echo form_open(base_url('admin/user/tambah'), 'class="form-horizontal"');
 ?>
 
 <div class="form-inline">

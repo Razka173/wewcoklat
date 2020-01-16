@@ -1,31 +1,36 @@
 <style>
-	.container-login100{
+	body, .container-login100, .container-logo, .limiter {
 		background-color: rgba(129, 58, 0, 1);
+	}
+	.login100-form-title{
+		color: rgba(129, 58, 0, 1);
 	}
 	.wrap-login100{
 		width: 430px;
 	}
 	.sign-in-login100{
 		background-color: rgba(129, 58, 0, 1);
-		border-radius: 30px;
+		border-radius: 10px;
+		height: 45px;
+		padding-top: 10px;
+		padding-bottom: 10px;
 	}
 	.logo-login100{
 		width: 150px;
 		align-content: center;
 	}
-	.container-logo{
-		/*display: inline;*/
+	.input100{
+		height: 44px !important;
 	}
 </style>
 <div class="limiter">
-	<div class="container-login100">
-		<div class="flex-row p-l-55 p-r-55 p-t-65 p-b-50 container-logo">
-			<a href="<?php echo base_url() ?>" class="logo-login100 justify-content-center">
+	<div class="flex-row p-t-40 m-b-30 container-logo justify-content-center">
+			<a href="<?php echo base_url() ?>" class="logo-login100">
 				<img class="logo-login100" src="<?php echo base_url('assets/upload/image/'.$site->logo) ?>" alt="<?php echo $site->namaweb ?> | <?php echo $site->tagline ?>">
 			</a>
-		</div>
-		
-		<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+	</div>
+	<div class="container-login100">
+		<div class="wrap-login100 p-l-40 p-r-40 p-t-30 p-b-30">
 			<!-- <form class="login100-form validate-form"> -->
 				<span class="login100-form-title p-b-33">
 					<?php echo $title ?>
@@ -49,45 +54,62 @@
 				// form open
 				echo form_open(base_url('masuk'), 'class="leave-comment"'); 
 				?>
+
+				
 				
 				<!-- EMAIL -->
-				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<input class="input100" type="text" name="email" placeholder="Email">
+				<div class="wrap-input100 validate-input">
+					<input class="input100 form-control" type="email" name="email" placeholder="Email">
 					<span class="focus-input100-1"></span>
 					<span class="focus-input100-2"></span>
 				</div>
 				
 				<!-- PASSWORD -->
-				<div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-					<input class="input100" type="password" name="pass" placeholder="Password">
+				<div class="wrap-input100 rs1 validate-input m-t-10">
+					<input class="input100 form-control" type="password" name="password" placeholder="Password">
 					<span class="focus-input100-1"></span>
 					<span class="focus-input100-2"></span>
 				</div>
 
-				<div class="container-login100-form-btn m-t-20 ">
-					<button class="login100-form-btn sign-in-login100">
-						Login
+				<div class="container-login100-form-btn m-t-20">
+					<button class="login100-form-btn sign-in-login100" type="submit">
+						Masuk
 					</button>
 				</div>
 
-				<div class="text-center p-t-25 p-b-4">
+				<div class="text-center p-t-15 p-b-4">
 					<span class="txt1">
 						Lupa
 					</span>
 
 					<a href="#" class="txt2 hov1">
-						Password?
+						password?
 					</a>
 				</div>
 
-				<div class="text-center">
+				<div class="text-center p-b-20">
 					<span class="txt1">
 						Belum memiliki akun? Silahkan
 					</span>
-
 					<a href="<?php echo base_url('registrasi') ?>" class="txt2 hov1">
-						Registrasi Disini
+						registrasi di sini
 					</a>
+				</div>
+
+				<div class="text-center p-b-10">
+					<span class="txt1">
+						Atau masuk dengan
+					</span>
+				</div>
+
+				<!-- Login dengan Google -->
+				<div class="row text-center social-btn justify-content-center">
+					<div class="col-6 p-r-3">
+				    	<a href="<?php echo base_url('google') ?>" class="btn btn-danger btn-block"><i class="fa fa-google"></i> <b class="flex">Google</b></a>
+				    </div>
+					<div class="col-6 p-l-3">
+				    	<a href="#" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> <b>Facebook</b></a>	
+				    </div>
 				</div>
 			<?php echo form_close(); ?>
 		</div>

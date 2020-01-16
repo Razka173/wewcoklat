@@ -13,7 +13,7 @@ class Simple_pelanggan
 	}
 
 	// Fungsi login
-	public function login($email, $password)
+	public function login($email, $password="")
 	{
 		$check = $this->CI->pelanggan_model->login($email, $password);
 		$second_check = $this->CI->pelanggan_model->login_google($email);
@@ -38,7 +38,7 @@ class Simple_pelanggan
 			redirect(base_url('dasbor'),'refresh');
 		} else {
 			// Kalau tidak ada (username password salah), maka suruh login lagi
-			$this->CI->session->set_flashdata('warning', 'Username atau password salah');
+			$this->CI->session->set_flashdata('warning', 'Email atau password salah.');
 			redirect(base_url('masuk'),'refresh');
 		}
 	}
