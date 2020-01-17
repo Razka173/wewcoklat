@@ -99,7 +99,7 @@ class Belanja extends CI_Controller {
 								'kode_transaksi'	=> $i->post('kode_transaksi'),
 								'tanggal_transaksi'	=> $i->post('tanggal_transaksi'),
 								'jumlah_transaksi'	=> $i->post('jumlah_transaksi'),
-								'status_bayar'		=> 'Belum',
+								'status_bayar'		=> 'Belum Bayar',
 								'tanggal_post'		=> date('Y-m-d H:i:s')
 							);
 				// Proses masuk ke header transaksi

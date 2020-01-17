@@ -35,7 +35,12 @@
 	</tr>
 	<tr>
 		<td>Bukti Bayar</td>
-		<td>: <?php if( $header_transaksi->bukti_bayar == "") {echo 'Belum ada';}else{ 
+		<td>: 
+		<?php 
+		if( $header_transaksi->bukti_bayar == "") {
+			echo 'Belum ada';
+		}
+		else{ 
 		?>
 			<img src="<?php echo base_url('assets/upload/image/'.$header_transaksi->bukti_bayar) ?>" class="img img-thumbnail" width="200">
 		<?php } ?>
@@ -43,7 +48,15 @@
 	</tr>
 	<tr>
 		<td>Tanggal Bayar</td>
-		<td>: <?php echo date('d-m-Y', strtotime($header_transaksi->tanggal_bayar)) ?></td>
+		<td>: 
+		<?php 
+		if( $header_transaksi->tanggal_bayar == "") {
+			echo "Belum ada";
+		}else{
+			echo date('d-m-Y', strtotime($header_transaksi->tanggal_bayar));
+		}
+		?>
+		</td>
 	</tr>
 	<tr>
 		<td>Jumlah Bayar</td>

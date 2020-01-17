@@ -6,8 +6,17 @@ echo validation_errors('<div class="alert alert-warning">','</div>');
 echo form_open(base_url('admin/transaksi/status/'.$header_transaksi->kode_transaksi),' class="form-horizontal"');
 ?>
 
+<?php  
+if($header_transaksi->bukti_bayar == ""){
+	echo "Belum ada bukti bayar";
+}
+else{
+?>
+	<img class="ml-5 mb-3 col-md-6" id="myImg" src="<?php echo base_url('assets/upload/image/'.$header_transaksi->bukti_bayar) ?>" alt="." style="width:100%; max-width:300px">
+<?php
+}
+?>
 <!-- BUKTI BAYAR -->
-<img class="ml-5 mb-3 col-md-6" id="myImg" src="<?php echo base_url('assets/upload/image/'.$header_transaksi->bukti_bayar) ?>" alt="Snow" style="width:100%; max-width:300px">
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -26,6 +35,7 @@ echo form_open(base_url('admin/transaksi/status/'.$header_transaksi->kode_transa
 			<option value="Konfirmasi">Konfirmasi</option>
 			<option value="Sudah Bayar" <?php if($header_transaksi->status_bayar=="Sudah Bayar") { echo "selected"; }?>>Sudah Bayar</option>
 			<option value="Belum Bayar" <?php if($header_transaksi->status_bayar=="Belum Bayar") { echo "selected"; }?>>Belum Bayar</option>
+			<option value="Bukti Tidak Valid" <?php if($header_transaksi->status_bayar=="Bukti Tidak Valid") { echo "selected"; }?>>Bukti Bayar Tidak Valid</option>
 		</select>
 	</div>
 </div>
