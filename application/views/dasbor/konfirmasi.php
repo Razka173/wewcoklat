@@ -11,8 +11,8 @@
 
 		<div class="col-sm-6 col-md-9 col-lg-9 p-b-50">
 
-				<h2><?php echo $title ?></h2>
-				<hr>
+			<h2><?php echo $title ?></h2>
+			<hr>
 			<p>Berikut adalah riwayat belanja Anda</p>
 
 			<?php 
@@ -70,7 +70,9 @@
 						<td width="30%">Pembayaran ke rekening</td>
 						<td>
 							<select name="id_rekening" class="form-control">
-								<?php foreach($rekening as $rekening) { ?>
+								<?php 
+								foreach($rekening as $rekening) { 
+								?>
 								<option value="<?php echo $rekening->id_rekening ?>" <?php if($header_transaksi->id_rekening==$rekening->id_rekening) { echo "selected"; } ?>>
 									<?php echo $rekening->nama_bank ?> (NO. Rekening: <?php echo $rekening->nomor_rekening ?> a.n <?php echo $rekening->nama_pemilik ?>)
 								</option>

@@ -56,3 +56,4 @@ $route['translate_uri_dashes'] = FALSE;
 // my route
 $route['admin'] = 'admin/dasbor';
 $route['kebijakan-privasi'] = "kontak/kebijakan_privasi" ;
+$route['rekening'] = 'dasbor/rekening';

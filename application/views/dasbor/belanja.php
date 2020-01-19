@@ -1,30 +1,67 @@
-<!-- Content page -->
-<style>
-	.dasbor-pelanggan th{
+`<style>
+	.container {
+		max-width: 1240px;
+	}
+	.konten{
+		overflow-x: auto;
+	}
+	table { 
+	  width: 100%; 
+	  border-collapse: collapse; 
+	  font-size: 14px;
+	}
+	tr:nth-of-type(odd) { 
+	  background: #eee; 
+	}
+	th { 
+	  background: #333; 
+	  color: white; 
+	  font-weight: bold; 
+	}
+	td, th { 
+	  padding: 6px; 
+	  border: 1px solid #ccc; 
+	  text-align: left; 
+	}
+	.tabel-pelanggan th{
 		font-size: 12px !important;
 		text-align: center;
 	}
-	.dasbor-pelanggan td{
+	.tabel-pelanggan td{
 		font-size: 14px;
 	}
-	.wew-table{
-		overflow-x: auto;
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+	.container {
+		padding-left: 2px;
+		margin-left: 2px;
+		margin-right: 2px;
+		padding-right: 2px;
 	}
+	.menu {
+		/*background-color: lightblue;*/
+		margin: -50px 0px -25px 50px;
+		padding: 0px;
+	}
+}
 </style>
+
+<!-- ISI -->
 <section class="bgwhite p-t-55 p-b-65">
-<div class="container">
+<div class="container m-l-30">
 	<div class="row">
-		<div class="col-sm-6 col-md-3 col-lg-3 p-b-50">
-			<div class="leftbar p-r-20 p-r-0-sm">
-				<!--  -->
+
+		<!-- KONTEN SEBELAH KIRI -->
+		<div class="col-sm-6 col-md-4 col-lg-2 p-b-50 menu">
+			<div class="leftbar p-r-0 p-r-0-sm">
+				<!-- MENU -->
 				<?php include('menu.php') ?>
 			</div>
 		</div>
-
-		<div class="col-sm-6 col-md-9 col-lg-9 p-b-50 wew-table">
-
-				<h2><?php echo $title ?></h2>
-				<hr>
+	
+		<!-- KONTEN SEBELAH KANAN -->
+		<div class="col-sm-6 col-md-8 col-lg-10 p-b-50 konten">
+			<h2><?php echo $title ?></h2>
+			<hr>
 			<p>Berikut adalah riwayat belanja Anda</p>
 
 			<?php 
@@ -32,14 +69,14 @@
 			if($header_transaksi) { 
 			?>
 
-			<table class="table table-bordered dasbor-pelanggan" width="100%">
+			<table class="table table-bordered tabel-pelanggan" width="100%">
 				<thead>
 					<tr class="bg-success">
 						<th>NO</th>
 						<th>KODE</th>
 						<th width="14%">TANGGAL</th>
-						<th>JUMLAH TOTAL</th>
-						<th width="10%">JUMLAH ITEM</th>
+						<th>TOTAL</th>
+						<th width="10%">ITEM</th>
 						<th>STATUS BAYAR</th>
 						<th>ACTION</th>
 					</tr>
@@ -66,14 +103,14 @@
 
 			<?php 
 			// Kalau ga ada tampilkan notifikasi
-			}else{ ?>
-
+			}else { 
+			?>
 				<p class="alert alert-success">
 					<i class="fa fa-warning"></i> Belum ada data transaksi
 				</p>
-
-			<?php } ?>
-
+			<?php
+			} 
+			?>
 			
 		</div>
 	</div>

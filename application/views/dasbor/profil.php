@@ -1,18 +1,30 @@
-<!-- Content page -->
+<style>
+	.container {
+		max-width: 1300px;
+	}
+	.konten{
+		overflow-x: auto;
+	}
+</style>
+
+<!-- ISI -->
 <section class="bgwhite p-t-55 p-b-65">
-<div class="container">
+<div class="container m-l-30">
 	<div class="row">
-		<div class="col-sm-6 col-md-3 col-lg-3 p-b-50">
-			<div class="leftbar p-r-20 p-r-0-sm">
-				<!--  -->
+
+		<!-- KONTEN SEBELAH KIRI -->
+		<div class="col-sm-6 col-md-4 col-lg-2 p-b-50 menu">
+			<div class="leftbar p-r-0 p-r-0-sm">
+				<!-- MENU -->
 				<?php include('menu.php') ?>
 			</div>
 		</div>
 
-		<div class="col-sm-6 col-md-9 col-lg-9 p-b-50">
-
-				<h2><?php echo $title ?></h2>
-				<hr>
+		<!-- KONTEN SEBELAH KANAN -->
+		<div class="col-sm-12 col-md-12 col-lg-10 p-b-50 konten">
+			<h2><?php echo $title ?></h2>
+			<hr>
+			
 		<?php 
 		// Notifikasi
 		if($this->session->flashdata('sukses')) {
@@ -25,7 +37,8 @@
 		echo validation_errors('<div class="alert alert-warning">','</div>');
 
 		// form open
-		echo form_open(base_url('dasbor/profil'), 'class="leave-comment"'); ?>
+		echo form_open(base_url('dasbor/profil'), 'class="leave-comment"'); 
+		?>
 		
 		<table class="table">
 			<thead>
@@ -66,8 +79,7 @@
 				</tr>
 			</tbody>
 		</table>
-
-
+		
 		<?php echo form_close(); ?>
 			
 		</div>

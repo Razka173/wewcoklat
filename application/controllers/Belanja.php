@@ -21,6 +21,10 @@ class Belanja extends CI_Controller {
 	public function index()
 	{
 		$keranjang	= $this->cart->contents();
+		
+		if(empty($keranjang)){
+			$this->session->set_flashdata('sukses','Keranjang Belanja Kosong');
+		}
 
 		$data = array(	'title'		=> 'Keranjang Belanja',
 						'keranjang' => $keranjang,
@@ -100,6 +104,7 @@ class Belanja extends CI_Controller {
 								'tanggal_transaksi'	=> $i->post('tanggal_transaksi'),
 								'jumlah_transaksi'	=> $i->post('jumlah_transaksi'),
 								'status_bayar'		=> 'Belum Bayar',
+								'status_pesanan'	=> 'Menunggu Pembayaran',
 								'tanggal_post'		=> date('Y-m-d H:i:s')
 							);
 				// Proses masuk ke header transaksi

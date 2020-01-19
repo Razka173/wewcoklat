@@ -62,10 +62,10 @@ class Registrasi extends CI_Controller {
 			// $this->email->send()
 		    if ( $kirim_email ) {
 		    	$this->session->set_flashdata('sukses', 'Registrasi berhasil, silahkan cek email kamu untuk melakukan verifikasi');
-		    	redirect(base_url('registrasi/sukses'),'refresh');
+		    	redirect(base_url('masuk'),'refresh');
 		    } else {
 		    	$this->session->set_flashdata('sukses', 'Registrasi berhasil, namun gagal mengirim verifikasi email');
-		       	redirect(base_url('registrasi/sukses'),'refresh');
+		       	redirect(base_url('masuk'),'refresh');
 		    }
 		}
 		// End masuk database
@@ -134,6 +134,27 @@ class Registrasi extends CI_Controller {
 	    	die;
 	    }
 	    return $this->email->send();
+	}
+
+	public function kirim(){
+		if( $this->session->userdata('email') == '' ){
+			redirect(base_url('masuk'),'refresh');
+		}
+		// Ambil data login id_pelanggan dari SESSION
+		$id_pelanggan		= $this->session->userdata('id_pelanggan');
+		$email_pelanggan	= $this->session->userdata('email');
+
+		//Enkripsi id
+		$encrypted_id 		= md5($id_pelanggan);
+		$kirim_email 		= $this->kirim_email($encrypted_id, $email_pelanggan);
+
+		if ( $kirim_email ) {
+		    $this->session->set_flashdata('sukses', 'Email Verifikasi berhasil dikirim, silahkan cek email kamu untuk melakukan verifikasi');
+		    	redirect(base_url('dasbor'),'refresh');
+		} else {
+		    	$this->session->set_flashdata('sukses', 'Gagal mengirim verifikasi email coba lagi nanti');
+		       	redirect(base_url('dasbor'),'refresh');
+		}
 	}
 }
 

@@ -16,8 +16,8 @@
 		echo '</div>';
 	} ?>
 
-	<p class="alert alert-success">Registrasi telah dilakukan. <a href="<?php echo base_url('masuk') ?>" class="btn btn-info btn-sm">Silahkan login disini</a>.
-		Anda juga bisa melakukan check out <a href="<?php echo base_url('belanja/checkout') ?>" class="btn btn-warning btn-sm"><i class="fa fa-shopping-cart"></i> Silahkan check out disini</a></p>
+	<p class="alert alert-success">Registrasi berhasil. <a href="<?php echo base_url('masuk') ?>" class="btn btn-info btn-sm">Silahkan login disini</a>.
+	</p>
 
 	
 	

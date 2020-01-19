@@ -37,4 +37,10 @@
   </div>
 </div>
 
+<?php
+
+   var_dump($provinces);
+
+?>
+
 </body>

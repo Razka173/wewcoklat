@@ -1,3 +1,9 @@
+<style>
+	.table-shopping-cart {
+		overflow-x: auto;
+	}
+</style>
+
 <!-- Cart -->
 <section class="cart bgwhite p-t-70 p-b-100">
 <div class="container">
@@ -18,7 +24,7 @@
 	}
 	?>
 
-	<table class="table-shopping-cart m-l-20">
+	<table class="table-shopping-cart m-l-20" style="overflow-x: auto;">
 		<tr class="table-head">
 			<th class="text-center">GAMBAR</th>
 			<th class="text-center">PRODUK</th>
@@ -97,6 +103,7 @@
     </div>
   </div>
 </div>
+<!-- END MODAL -->
 
 		<?php 
 		// Echo form close
@@ -113,10 +120,12 @@
 		
 	</table>
 		<br>
+	
 	<?php 
 	echo form_open(base_url('belanja/checkout')); 
 	$kode_transaksi = date('dmY').strtoupper(random_string('alnum',8));
 	?>
+
 	<input type="hidden" name="id_pelanggan" value="<?php echo $pelanggan->id_pelanggan; ?>">
 	<input type="hidden" name="jumlah_transaksi" value="<?php echo $this->cart->total(); ?>">
 	<input type="hidden" name="tanggal_transaksi" value="<?php echo date('Y-m-d'); ?>">
@@ -161,7 +170,6 @@
 	<?php echo form_close(); ?>
 </div>
 </div>
-
 
 </div>
 </section>

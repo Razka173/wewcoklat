@@ -29,6 +29,12 @@
 	</li>
 
 	<li class="p-t-4">
+		<a href="<?php echo base_url('dasbor/alamat') ?>" class="s-text13 active1">
+			<i class="fa fa-home" style="width: 30px"></i> Alamat
+		</a>
+	</li>
+
+	<li class="p-t-4">
 		<a href="<?php echo base_url('dasbor/rekening') ?>" class="s-text13 active1">
 			<i class="fa fa-credit-card" style="width: 30px"></i> Rekening Bank
 		</a>
@@ -39,5 +45,5 @@
 			<i class="fa fa-sign-out" style="width: 30px"></i> Logout
 		</a>
 	</li>
-
+	
 </ul>
