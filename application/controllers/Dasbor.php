@@ -284,10 +284,10 @@ class Dasbor extends CI_Controller {
 		$pelanggan 			= $this->pelanggan_model->detail($id_pelanggan);
 		$rekening 			= $this->rekening_model->listing();
 
-		$data = array(	'title'				=> 'Informasi Rekening Pembayaran',
-						'header_transaksi'	=> $header_transaksi,
+		$data = array(	'title'				=> 'Informasi Pembayaran',
+						'rekening'			=> $rekening,
 						'pelanggan'			=> $pelanggan,
-						'isi'				=> 'dasbor/list'
+						'isi'				=> 'dasbor/info'
 					);
 		$this->load->view('layout/wrapper', $data, FALSE);
 	}

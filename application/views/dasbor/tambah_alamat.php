@@ -56,12 +56,12 @@
             <div class="row form-group">
                 <div class="col">
                 <label for="rt">RT</label>
-                <input type="number" class="form-control border border-dark" id="rt" name="rt" placeholder="contoh: 002" max="999" value="<?php echo set_value('rt') ?>" required>
+                <input type="number" class="form-control border border-dark" id="rt" name="rt" placeholder="contoh: 002" min="1" max="999" value="<?php echo set_value('rt') ?>" required>
                 </div>
 
                 <div class="col">
                 <label for="rw">RW</label>
-                <input type="number" class="form-control border border-dark" id="rw" name="rw" placeholder="contoh: 003" max="999" value="<?php echo set_value('rw') ?>" required>
+                <input type="number" class="form-control border border-dark" id="rw" name="rw" placeholder="contoh: 003" min="1" max="999" value="<?php echo set_value('rw') ?>" required>
                 </div>
 
                 <div class="col">
@@ -81,7 +81,7 @@
 
             <div class="form-group">
                 <label for="telepon">Telepon</label>
-                <input type="number" class="form-control border border-dark" id="telepon" name="telepon" placeholder="contoh: 083896179217" value="<?php echo set_value($pelanggan->telepon) ?>" required>
+                <input type="tel" class="form-control border border-dark" id="telepon" name="telepon" placeholder="contoh: 083896179217" value="<?php echo $pelanggan->telepon ?>" required>
             </div>
 
             <button type="submit" class="btn btn-success m-t-15">Simpan</button>

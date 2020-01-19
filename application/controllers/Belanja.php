@@ -13,6 +13,7 @@ class Belanja extends CI_Controller {
 		$this->load->model('pelanggan_model');
 		$this->load->model('header_transaksi_model');
 		$this->load->model('transaksi_model');
+		$this->load->model('alamat_pelanggan_model');
 		// load helper random string
 		$this->load->helper('string');
 	}
@@ -54,6 +55,7 @@ class Belanja extends CI_Controller {
 			$email 				= $this->session->userdata('email');
 			$nama_pelanggan		= $this->session->userdata('nama_pelanggan');
 			$pelanggan 			= $this->pelanggan_model->sudah_login($email, $nama_pelanggan);
+			$alamat_pelanggan 	= $this->alamat_pelanggan_model->pelanggan($pelanggan->id_pelanggan);
 
 			$keranjang	= $this->cart->contents();
 			if(empty($keranjang)){
@@ -76,9 +78,6 @@ class Belanja extends CI_Controller {
 			$valid->set_rules('telepon','Nomor telepon','required',
 				array(	'required'		=> '%s harus diisi'));
 
-			$valid->set_rules('alamat','Alamat','required',
-				array(	'required'		=> '%s harus diisi'));
-
 			$valid->set_rules('email','Email','required|valid_email',
 				array(	'required'		=> '%s harus diisi',
 						'valid_email'	=> '%s tidak valid'));
@@ -86,20 +85,29 @@ class Belanja extends CI_Controller {
 		if($valid->run()===FALSE) {
 		// End validasi
 
-			$data = array(	'title'		=> 'Checkout',
-							'keranjang' => $keranjang,
-							'pelanggan'	=> $pelanggan,
-							'isi'		=> 'belanja/checkout'
+			$data = array(	'title'				=> 'Checkout',
+							'keranjang' 		=> $keranjang,
+							'pelanggan'			=> $pelanggan,
+							'alamat_pelanggan'	=> $alamat_pelanggan,
+							'isi'				=> 'belanja/checkout'
 						);
 			$this->load->view('layout/wrapper', $data, FALSE);
 			// Masuk database
 			}else{
 				$i = $this->input;
+				if($i->post('metode_pengiriman')=='COD'){
+					$alamat = "COD " . $i->post('cod');				
+				}
+				if($i->post('metode_pengiriman')=='JNE'){
+					$id_alamat = $i->post('alamat');
+					$data_alamat = $this->alamat_pelanggan_model->detail($id_alamat);
+					$alamat = $data_alamat->alamat_detail;
+				}
 				$data = array(	'id_pelanggan'		=> $pelanggan->id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
 								'email'				=> $i->post('email'),
 								'telepon'			=> $i->post('telepon'),
-								'alamat'			=> $i->post('alamat'),
+								'alamat'			=> $alamat,
 								'kode_transaksi'	=> $i->post('kode_transaksi'),
 								'tanggal_transaksi'	=> $i->post('tanggal_transaksi'),
 								'jumlah_transaksi'	=> $i->post('jumlah_transaksi'),

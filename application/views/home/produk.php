@@ -27,6 +27,7 @@ echo form_hidden('redirect_page', str_replace('index.php/','',current_url()));
 ?>
 	<!-- Block2 -->
 	<div class="block2">
+		
 		<div class="block2-img wrap-pic-w of-hidden pos-relative">
 			<img src="<?php echo base_url('assets/upload/image/'.$produk->gambar) ?>" alt="<?php echo $produk->nama_produk ?>">
 
@@ -54,6 +55,7 @@ echo form_hidden('redirect_page', str_replace('index.php/','',current_url()));
 				IDR <?php echo number_format($produk->harga,'0',',','.') ?>
 			</span>
 		</div>
+		
 	</div>
 
 <?php

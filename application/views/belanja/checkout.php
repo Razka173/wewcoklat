@@ -17,9 +17,15 @@
 	<br><br>
 
 	<!-- NOTIFIKASI SUKSES -->
-	<?php if($this->session->flashdata('sukses')) {
+	<?php 
+	if($this->session->flashdata('sukses')) {
 		echo '<div class="alert alert-warning">';
 		echo $this->session->flashdata('sukses');
+		echo '</div>';
+	}
+	if($this->session->flashdata('warning')) {
+		echo '<div class="alert alert-warning">';
+		echo $this->session->flashdata('warning');
 		echo '</div>';
 	}
 	?>
@@ -119,6 +125,7 @@
 		</tr>
 		
 	</table>
+
 		<br>
 	
 	<?php 
@@ -129,47 +136,109 @@
 	<input type="hidden" name="id_pelanggan" value="<?php echo $pelanggan->id_pelanggan; ?>">
 	<input type="hidden" name="jumlah_transaksi" value="<?php echo $this->cart->total(); ?>">
 	<input type="hidden" name="tanggal_transaksi" value="<?php echo date('Y-m-d'); ?>">
-	<table class="table">
-			<thead>
-				<tr>
-					<th width="25%">Kode Transaksi</th>
-					<th><input type="text" name="kode_transaksi" class="form-control form-control-success" value="<?php echo $kode_transaksi ?>" readonly required></th>
-				</tr>
-				<tr>
-					<th width="25%">Nama Penerima</th>
-					<th><input type="text" name="nama_pelanggan" class="form-control border border-dark" placeholder="Nama lengkap" value="<?php echo $pelanggan->nama_pelanggan ?>" required></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Email Penerima</td>
-					<td><input type="email" name="email" class="form-control border border-dark" placeholder="Email" value="<?php echo $pelanggan->email ?>" required></td>
-				</tr>
-				<tr>
-					<td>Nomor HP</td>
-					<td><input type="text" name="telepon" class="form-control border border-dark" placeholder="Masukan Nomor HP disini..." value="<?php echo $pelanggan->telepon ?>" required></td>
-				</tr>
-				<tr>
-					<td>Alamat Pengiriman</td>
-					<td><textarea name="alamat" class="form-control border border-dark" placeholder="Masukan Alamat disini..."><?php echo $pelanggan->alamat ?></textarea></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<button class="btn btn-success btn-lg" type="submit">
-							<i class="fa fa-save"></i> Check Out Sekarang
-						</button>
-						<button class="btn btn-default btn-lg" type="reset">
-							<i class="fa fa-times"></i> Reset
-						</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+
+
+	<div class="m-l-50 tabel-form">
+
+		<div class="row form-group">
+			<label class="col-lg-3" for="kode_transaksi">Kode Transaksi</label>
+	        <input type="text" class="form-control border border-dark col-lg-4" id="kode_transaksi" name="kode_transaksi" value="<?php echo $kode_transaksi ?>" required readonly>
+	    </div>
+
+	    <div class="row form-group">
+			<label class="col-lg-3" for="nama_pelanggan">Nama Penerima</label>
+			<input type="text" class="form-control border border-dark col-lg-4" id="nama_pelanggan" name="nama_pelanggan" placeholder="Nama lengkap" value="<?php echo $pelanggan->nama_pelanggan ?>" required>
+		</div>
+
+		<div class="row form-group">
+			<label class="col-lg-3" for="email">Email Penerima</label>
+			<input type="email" class="form-control border border-dark col-lg-4" id="email" name="email" placeholder="Email" value="<?php echo $pelanggan->email ?>" required>
+		</div>
+
+		<div class="row form-group">
+			<label class="col-lg-3" for="telepon">Nomor HP</label>
+			<input type="text" class="form-control border border-dark col-lg-4" id="telepon" name="telepon" placeholder="Masukan Nomor HP disini..." value="<?php echo $pelanggan->telepon ?>" required></td>
+		</div>
+
+		<div class="row form-group">
+			<label class="col-lg-3" for="metode_pengiriman">Metode Pengiriman</label>
+			<select id="metode_pengiriman" class="form-control border border-dark col-lg-4" name="metode_pengiriman">
+				<option value="">- Pilih Metode Pengiriman -</option>
+				<option value="COD">Cash on Delivery (COD)</option>
+				<option value="JNE">Antar Kurir</option>
+			</select>
+		</div>
+
+		<div class="row form-group" style="display: none" id="div_alamat">
+			<label class="col-lg-3" for="alamat">Alamat Pengiriman</label>
+			<?php
+			if($alamat_pelanggan){
+			?>
+			<select id="alamat" name="alamat" class="form-control border border-dark col-lg-6">
+				<option value="">- Pilih Alamat -</option>
+				<?php 
+					foreach($alamat_pelanggan as $alamat_pelanggan) { 
+				?>
+				<option value="<?php echo $alamat_pelanggan->id_alamat ?>">
+					<?php echo $alamat_pelanggan->alamat_detail ?>
+				</option>
+				<?php 
+					}
+				
+				?>
+			</select>
+			<?php 
+			} else { ?>
+				<a href="<?php echo base_url('dasbor/alamat') ?>" class="btn btn-success">Tambah Alamat</a>
+			<?php
+				}
+			?>
+		</div>
+
+		<div class="row form-group" style="display: none" id="div_cod">
+			<label class="col-lg-3" for="cod">Tempat Janjian</label>
+			<select id="cod" name="cod" class="form-control border border-dark col-lg-6">
+				<option value="UNJ">UNJ</option>
+				<option value="DEPOK">DEPOK</option>
+			</select>
+		</div>
+
+		<div class="row m-t-50 m-l-110">
+			<button class="btn btn-success btn-lg" type="submit">
+				<i class="fa fa-save"></i> Check Out Sekarang
+			</button>
+			<button class="btn btn-default btn-lg" type="reset">
+				<i class="fa fa-times"></i> Reset
+			</button>
+		</div>
+
+    </div>
 
 	<?php echo form_close(); ?>
 </div>
 </div>
+	
 
 </div>
+
 </section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+$("#metode_pengiriman").change(function(){
+    var metode_pengiriman = this.value;
+    if(metode_pengiriman=='JNE'){
+    	$("#div_alamat").show();
+    	$("#div_cod").hide();
+    }
+    if(metode_pengiriman=='COD'){
+    	$("#div_cod").show();
+    	$("#div_alamat").hide();
+    }
+    
+});
+
+</script>

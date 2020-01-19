@@ -69,6 +69,7 @@
 					<tr>
 						<td width="30%">Pembayaran ke rekening</td>
 						<td>
+							<!-- SELECT REKENING -->
 							<select name="id_rekening" class="form-control">
 								<?php 
 								foreach($rekening as $rekening) { 
