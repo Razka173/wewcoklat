@@ -231,8 +231,8 @@ class Alamat extends CI_Controller {
         echo $datas;
     }
 
-    function ongkir($id_alamat=7){
-    	// $id_alamat		= $this->input->post('no_alamat', TRUE);
+    function ongkir(){
+    	$id_alamat		= $this->input->post('no_alamat', TRUE);
     	$kota_asal      = 154;	// Jakarta Timur
     	$alamat 		= $this->alamat_pelanggan_model->detail($id_alamat);
         $tujuan 		= $alamat->id_kota;

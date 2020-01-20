@@ -133,6 +133,17 @@
 	$kode_transaksi = date('dmY').strtoupper(random_string('alnum',8));
 	?>
 
+	<?php 
+	// Display error
+    echo validation_errors('<div class="alert alert-warning">','</div>');
+
+    if($this->session->flashdata('kosong')) {
+		echo '<div class="alert alert-warning">';
+		echo $this->session->flashdata('kosong');
+		echo '</div>';
+	}
+	?>
+
 	<input type="hidden" name="id_pelanggan" value="<?php echo $pelanggan->id_pelanggan; ?>">
 	<input type="hidden" name="jumlah_transaksi" value="<?php echo $this->cart->total(); ?>">
 	<input type="hidden" name="tanggal_transaksi" value="<?php echo date('Y-m-d'); ?>">
@@ -157,7 +168,7 @@
 
 		<div class="row form-group">
 			<label class="col-lg-3" for="telepon">Nomor HP</label>
-			<input type="text" class="form-control border border-dark col-lg-4" id="telepon" name="telepon" placeholder="Masukan Nomor HP disini..." value="<?php echo $pelanggan->telepon ?>" required></td>
+			<input type="tel" class="form-control border border-dark col-lg-4" id="telepon" name="telepon" placeholder="Masukan Nomor HP disini..." value="<?php echo $pelanggan->telepon ?>" required></td>
 		</div>
 
 		<div class="row form-group">
@@ -240,6 +251,7 @@ $("#metode_pengiriman").change(function(){
     if(metode_pengiriman=='cod'){
     	$("#div_cod").show();
     	$("#div_alamat").hide();
+    	$("#div_ongkir").hide();
     } 
 });
 

@@ -82,6 +82,9 @@ class Belanja extends CI_Controller {
 				array(	'required'		=> '%s harus diisi',
 						'valid_email'	=> '%s tidak valid'));
 
+			$valid->set_rules('metode_pengiriman','Metode Pengiriman','required',
+				array(	'required'		=> '%s harus diisi'));
+
 		if($valid->run()===FALSE) {
 		// End validasi
 
@@ -95,17 +98,29 @@ class Belanja extends CI_Controller {
 			// Masuk database
 			}else{
 				$i = $this->input;
+				// if($i->post('metode_pengiriman')=='belum_isi'){
+				// 	$this->session->set_flashdata('warning', 'value');
+				// }
 				if($i->post('metode_pengiriman')=='cod'){
-					$alamat = "COD :" . $i->post('cod');
-					$total_tagihan = $i->post('jumlah_transaksi');				
+					$alamat_cod 	= $i->post('cod');
+					if( empty($alamat_cod) ){
+						$this->session->set_flashdata('kosong', 'Lokasi COD harus diisi');
+						redirect(base_url('belanja/checkout'),'refresh');
+					}
+					$alamat 		= "COD :" . $alamat_cod;
+					$total_tagihan	= $i->post('jumlah_transaksi');				
 				}
 				if($i->post('metode_pengiriman')=='jne'){
-					$id_alamat = $i->post('alamat');
-					$data_alamat = $this->alamat_pelanggan_model->detail($id_alamat);
-					$alamat = $data_alamat->alamat_detail;
-					$ongkir = $i->post('ongkir');
-					$tagihan = $i->post('jumlah_transaksi');
-					$total_tagihan =  $ongkir + $tagihan;
+					$id_alamat 		= $i->post('alamat');
+					if ( empty($id_alamat) ){
+						$this->session->set_flashdata('kosong', 'Alamat kirim harus diisi');
+						redirect(base_url('belanja/checkout'),'refresh');
+					}
+					$data_alamat 	= $this->alamat_pelanggan_model->detail($id_alamat);
+					$alamat 		= $data_alamat->alamat_detail;
+					$ongkir 		= $i->post('ongkir');
+					$tagihan 		= $i->post('jumlah_transaksi');
+					$total_tagihan 	=  $ongkir + $tagihan;
 
 					// $alamat = $i->post('alamat');
 				}

@@ -179,7 +179,7 @@
 
 				<a href="<?php echo base_url('dasbor/info') ?>">
 					<button class="btn btn-info">
-						Info Rekening Pembayaran
+						Informasi Pembayaran
 					</button>
 				</a>
 

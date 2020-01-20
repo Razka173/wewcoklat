@@ -110,6 +110,12 @@
 				</button>
 			</a>
 
+			<a href="<?php echo base_url('belanja/checkout') ?>">
+				<button class="btn btn-primary">
+					Ke halaman Checkout
+				</button>
+			</a>
+
 		</div>
 
 	</div>
