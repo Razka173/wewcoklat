@@ -162,46 +162,49 @@
 
 		<div class="row form-group">
 			<label class="col-lg-3" for="metode_pengiriman">Metode Pengiriman</label>
-			<select id="metode_pengiriman" class="form-control border border-dark col-lg-4" name="metode_pengiriman">
+			<select id="metode_pengiriman" name="metode_pengiriman" class="form-control border border-dark col-lg-4">
 				<option value="">- Pilih Metode Pengiriman -</option>
-				<option value="COD">Cash on Delivery (COD)</option>
-				<option value="JNE">Antar Kurir</option>
+				<option value="cod">Cash on Delivery (COD)</option>
+				<option value="jne">Antar Kurir</option>
 			</select>
 		</div>
 
 		<div class="row form-group" style="display: none" id="div_alamat">
 			<label class="col-lg-3" for="alamat">Alamat Pengiriman</label>
-			<?php
-			if($alamat_pelanggan){
-			?>
-			<select id="alamat" name="alamat" class="form-control border border-dark col-lg-6">
+			<?php if($alamat_pelanggan) { ?>
+			<select id="alamat_kirim" name="alamat" class="form-control border border-dark col-lg-6">
 				<option value="">- Pilih Alamat -</option>
-				<?php 
-					foreach($alamat_pelanggan as $alamat_pelanggan) { 
-				?>
+				<?php foreach($alamat_pelanggan as $alamat_pelanggan) { ?>
 				<option value="<?php echo $alamat_pelanggan->id_alamat ?>">
 					<?php echo $alamat_pelanggan->alamat_detail ?>
 				</option>
-				<?php 
-					}
-				
-				?>
+				<?php } ?>
 			</select>
-			<?php 
-			} else { ?>
+			<?php } else { ?>
 				<a href="<?php echo base_url('dasbor/alamat') ?>" class="btn btn-success">Tambah Alamat</a>
-			<?php
-				}
-			?>
+			<?php } ?>
 		</div>
 
 		<div class="row form-group" style="display: none" id="div_cod">
 			<label class="col-lg-3" for="cod">Tempat Janjian</label>
 			<select id="cod" name="cod" class="form-control border border-dark col-lg-6">
-				<option value="UNJ">UNJ</option>
-				<option value="DEPOK">DEPOK</option>
+				<option value="">- Pilih Tempat Janjian -</option>
+				<option value="UNJ">Kampus UNJ</option>
+				<option value="Depok">Depok</option>
+				<option value="lainnya">Lainnya</option>
 			</select>
 		</div>
+
+		<div class="row form-group" style="display: none" id="div_ongkir">
+			<label class="col-lg-3" for="ongkir">Pilih Ongkos Kirim</label>
+			<select id="list_ongkir" name="ongkir" class="form-control border border-dark col-lg-6"></select>
+		</div>
+		
+		<div class="row">
+		<ul class="list-group list-group-flush">
+        	<div id="list_kurir_div"></div>
+    	</ul>
+    	</div>
 
 		<div class="row m-t-50 m-l-110">
 			<button class="btn btn-success btn-lg" type="submit">
@@ -227,18 +230,36 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-
+var base_url = "<?php echo base_url();?>";
 $("#metode_pengiriman").change(function(){
     var metode_pengiriman = this.value;
-    if(metode_pengiriman=='JNE'){
+    if(metode_pengiriman=='jne'){
     	$("#div_alamat").show();
     	$("#div_cod").hide();
     }
-    if(metode_pengiriman=='COD'){
+    if(metode_pengiriman=='cod'){
     	$("#div_cod").show();
     	$("#div_alamat").hide();
-    }
+    } 
+});
+
+$("#alamat_kirim").change(function(){
+    var id_alamat = this.value;
+    cost(id_alamat);
+    $("#div_ongkir").show();
     
 });
+
+cost = function(id_alamat){
+    $.ajax({
+    type: 'post',
+    url: base_url + 'alamat/ongkir',
+    data: {no_alamat:id_alamat},
+    dataType  : 'html',
+    success: function (data) {
+    	$("#list_ongkir").html(data);
+    }
+});
+}
 
 </script>

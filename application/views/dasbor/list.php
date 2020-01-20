@@ -86,7 +86,7 @@
 	td:nth-of-type(1):before { content: "NO"; }
 	td:nth-of-type(2):before { content: "KODE"; }
 	td:nth-of-type(3):before { content: "TANGGAL"; }
-	td:nth-of-type(4):before { content: "TOTAL"; }
+	td:nth-of-type(4):before { content: "TOTAL TAGIHAN"; }
 	td:nth-of-type(5):before { content: "ITEM"; }
 	td:nth-of-type(6):before { content: "STATUS BAYAR"; }
 	td:nth-of-type(7):before { content: "STATUS PESANAN"; }
@@ -147,7 +147,7 @@
 							<th>NO</th>
 							<th>KODE</th>
 							<th>TANGGAL</th>
-							<th>TOTAL</th>
+							<th>TOTAL TAGIHAN</th>
 							<th>ITEM</th>
 							<th>STATUS BAYAR</th>
 							<th>STATUS PESANAN</th>
@@ -167,7 +167,9 @@
 							<td>
 								<div class="btn-group td-action">
 									<a href="<?php echo base_url('dasbor/detail/'.$header_transaksi->kode_transaksi) ?>" class="btn btn-success btn-sm td-action"><i class="fa fa-eye"></i> Detail</a>
+									<a href="<?php echo base_url('dasbor/bayar/'.$header_transaksi->kode_transaksi) ?>" class="btn btn-danger btn-sm td-action"><i class="fa fa-money"></i> <strong>Bayar</strong></a>
 									<a href="<?php echo base_url('dasbor/konfirmasi/'.$header_transaksi->kode_transaksi) ?>" class="btn btn-info btn-sm td-action"><i class="fa fa-upload"></i> Konfirmasi Bayar</a>
+
 								</div>
 							</td>
 						</tr>

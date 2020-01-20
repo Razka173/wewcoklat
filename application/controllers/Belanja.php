@@ -95,13 +95,19 @@ class Belanja extends CI_Controller {
 			// Masuk database
 			}else{
 				$i = $this->input;
-				if($i->post('metode_pengiriman')=='COD'){
-					$alamat = "COD " . $i->post('cod');				
+				if($i->post('metode_pengiriman')=='cod'){
+					$alamat = "COD :" . $i->post('cod');
+					$total_tagihan = $i->post('jumlah_transaksi');				
 				}
-				if($i->post('metode_pengiriman')=='JNE'){
+				if($i->post('metode_pengiriman')=='jne'){
 					$id_alamat = $i->post('alamat');
 					$data_alamat = $this->alamat_pelanggan_model->detail($id_alamat);
 					$alamat = $data_alamat->alamat_detail;
+					$ongkir = $i->post('ongkir');
+					$tagihan = $i->post('jumlah_transaksi');
+					$total_tagihan =  $ongkir + $tagihan;
+
+					// $alamat = $i->post('alamat');
 				}
 				$data = array(	'id_pelanggan'		=> $pelanggan->id_pelanggan,
 								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
@@ -110,7 +116,7 @@ class Belanja extends CI_Controller {
 								'alamat'			=> $alamat,
 								'kode_transaksi'	=> $i->post('kode_transaksi'),
 								'tanggal_transaksi'	=> $i->post('tanggal_transaksi'),
-								'jumlah_transaksi'	=> $i->post('jumlah_transaksi'),
+								'jumlah_transaksi'	=> $total_tagihan,
 								'status_bayar'		=> 'Belum Bayar',
 								'status_pesanan'	=> 'Menunggu Pembayaran',
 								'tanggal_post'		=> date('Y-m-d H:i:s')

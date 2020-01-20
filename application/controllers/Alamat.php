@@ -223,12 +223,64 @@ class Alamat extends CI_Controller {
                 $service         = $obj['rajaongkir']['results'][$i]['costs'][$j]['service'];
                 $biaya           = $obj['rajaongkir']['results'][$i]['costs'][$j]['cost'][0]['value'];
                 $biaya_format    = number_format($obj['rajaongkir']['results'][$i]['costs'][$j]['cost'][0]['value']);
-            
+            	
                 $datas .='<li id="serv-'.$service.'" onclick="klikongkir(\''.$nama_pengiriman.'\',\''.$service.'\',\''.$biaya.'\',\''.$biaya_format.'\')" class="list-group-item clearall-kurir" style="cursor:pointer;margin:1px;"><span style="color:black;font-weight:bold">'.$obj['rajaongkir']['results'][$i]['name'].' - '.$service.'</span> <br> <small><b style="color:red">Rp. '.number_format($obj['rajaongkir']['results'][$i]['costs'][$j]['cost'][0]['value']).'</b></small> / <small>Pengiriman : '.$obj['rajaongkir']['results'][$i]['costs'][$j]['cost'][0]['etd'].' hari</small></li>';
 
             }   
         }
         echo $datas;
+    }
+
+    function ongkir($id_alamat=7){
+    	// $id_alamat		= $this->input->post('no_alamat', TRUE);
+    	$kota_asal      = 154;	// Jakarta Timur
+    	$alamat 		= $this->alamat_pelanggan_model->detail($id_alamat);
+        $tujuan 		= $alamat->id_kota;
+        $berat          = '1000';
+        $kurir 			= 'jne';
+
+        //&courier=jne
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "origin=$kota_asal&originType=city&destination=$tujuan&destinationType=city&weight=$berat&courier=$kurir",
+            CURLOPT_HTTPHEADER => array(
+              "content-type: application/x-www-form-urlencoded",
+              "key: $this->api_key"
+            ),
+          ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } else {
+          //echo $response;
+        }
+        
+        $obj = json_decode($response, true);
+        
+        $baru = '<option value=0>- Pilih Ongkir -</option>';
+        for($i=0; $i < count($obj['rajaongkir']['results']); $i++){
+            for($j=0; $j < count($obj['rajaongkir']['results'][$i]['costs']); $j++){
+                
+                $nama_pengiriman = $obj['rajaongkir']['results'][$i]['name'];
+                $service         = $obj['rajaongkir']['results'][$i]['costs'][$j]['service'];
+                $biaya           = $obj['rajaongkir']['results'][$i]['costs'][$j]['cost'][0]['value'];
+                $biaya_format    = number_format($obj['rajaongkir']['results'][$i]['costs'][$j]['cost'][0]['value']);
+
+                $baru .= "<option value='".$biaya."'>".$nama_pengiriman." - ".$biaya_format." - ".$service."</option>";
+
+            }   
+        }
+        echo $baru;	
     }
 
 	function detail_provinsi($id_provinsi)

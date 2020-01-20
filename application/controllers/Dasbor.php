@@ -59,8 +59,6 @@ class Dasbor extends CI_Controller {
 			$this->session->set_flashdata('warning', 'Anda mencoba mengakses data transaksi orang lain');
 			redirect(base_url('masuk'));
 		}
-		
-
 		$data = array(	'title'				=> 'Riwayat Belanja',
 						'header_transaksi'	=> $header_transaksi,
 						'transaksi'			=> $transaksi,
@@ -268,7 +266,7 @@ class Dasbor extends CI_Controller {
 		$pelanggan 			= $this->pelanggan_model->detail($id_pelanggan);
 		$alamat_pelanggan 	= $this->alamat_pelanggan_model->pelanggan($id_pelanggan);
 
-		$data = array(	'title'					=> 'Halaman Rekening Bank Pelanggan',
+		$data = array(	'title'					=> 'Halaman Daftar Alamat Pelanggan',
 						'alamat_pelanggan'		=> $alamat_pelanggan,
 						'pelanggan'				=> $pelanggan,
 						'isi'					=> 'dasbor/alamat'
