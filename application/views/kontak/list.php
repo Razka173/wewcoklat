@@ -1,11 +1,27 @@
 <section>
 <style>
-    @media (max-width: 768px) {
+input[type=text],input[type=email], select, textarea {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */ 
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+/* Add a background color and some padding around the form */
+.container-kontak {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+@media (max-width: 768px) {
         .container-kontak{
             margin-top: 0px;
             margin-bottom: 0px;
         }
-    }
+}
 </style>
 <div class="container container-kontak m-t-100 m-b-150">
 
@@ -49,21 +65,3 @@
 </div>
 </section>
 
-<style>
-input[type=text],input[type=email], select, textarea {
-    width: 100%; /* Full width */
-    padding: 12px; /* Some padding */ 
-    border: 1px solid #ccc; /* Gray border */
-    border-radius: 4px; /* Rounded borders */
-    box-sizing: border-box; /* Make sure that padding and width stays in place */
-    margin-top: 6px; /* Add a top margin */
-    margin-bottom: 16px; /* Bottom margin */
-    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
-}
-/* Add a background color and some padding around the form */
-.container-kontak {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-} 
-</style>

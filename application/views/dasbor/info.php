@@ -36,7 +36,10 @@
             <?php 
             }
             ?>
-            
+            <h2 class="text-center  m-t-50">QR-DANA</h2>
+            <div class="row justify-content-center">
+                <img src="https://i.imgur.com/RbaEUO1.jpg" alt="QR-DANA" width="450px">
+            </div>
 
             <a href="<?php echo base_url('dasbor') ?>" class="btn btn-secondary m-t-50">Kembali ke halaman Dashboard</a>
 

@@ -60,19 +60,17 @@
 				// form open
 				echo form_open(base_url('masuk'), 'class="leave-comment"'); 
 				?>
-
-				
 				
 				<!-- EMAIL -->
 				<div class="wrap-input100 validate-input">
-					<input class="input100 form-control" type="email" name="email" placeholder="Email">
+					<input class="input100 form-control" type="email" name="email" placeholder="Email" required>
 					<span class="focus-input100-1"></span>
 					<span class="focus-input100-2"></span>
 				</div>
 				
 				<!-- PASSWORD -->
 				<div class="wrap-input100 rs1 validate-input m-t-10">
-					<input class="input100 form-control" type="password" name="password" placeholder="Password">
+					<input class="input100 form-control" type="password" name="password" placeholder="Password" required>
 					<span class="focus-input100-1"></span>
 					<span class="focus-input100-2"></span>
 				</div>
@@ -88,7 +86,7 @@
 						Lupa
 					</span>
 
-					<a href="#" class="txt2 hov1">
+					<a href="<?php echo base_url('masuk/lupa') ?>" class="txt2 hov1">
 						password?
 					</a>
 				</div>
@@ -114,7 +112,7 @@
 				    	<a href="<?php echo base_url('google') ?>" class="btn btn-danger btn-block"><i class="fa fa-google"></i> <b class="flex">Google</b></a>
 				    </div>
 					<div class="col-6 p-l-3">
-				    	<a href="#" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> <b>Facebook</b></a>	
+				    	<a href="<?php echo base_url('facebook') ?>" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> <b>Facebook</b></a>	
 				    </div>
 				</div>
 			<?php echo form_close(); ?>

@@ -93,7 +93,7 @@
 	td:nth-of-type(8):before { content: "ACTION"; }
 }
 </style>
-
+<!-- ####################################################################################################### -->
 <!-- ISI -->
 <section class="bgwhite p-t-55 p-b-65">
 <div class="container m-l-30">
@@ -109,6 +109,7 @@
 
 		<!-- KONTEN SEBELAH KANAN -->
 		<div class="col-sm-12 col-md-12 col-lg-10 p-b-50 konten">
+<!-- ####################################################################################################### -->
 				<div class="alert alert-success">
 					<h1>Selamat datang <strong><?php echo $this->session->userdata('nama_pelanggan'); ?></strong></h1>
 				</div>
@@ -192,6 +193,7 @@
 					</p>
 
 				<?php } ?>
+<!-- ####################################################################################### -->
 		</div>
 	</div>
 </div>

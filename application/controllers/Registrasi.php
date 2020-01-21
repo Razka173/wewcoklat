@@ -17,8 +17,9 @@ class Registrasi extends CI_Controller {
 		// Validasi input
 		$valid = $this->form_validation;
 
-		$valid->set_rules('nama_pelanggan','Nama lengkap','required',
-			array(	'required'		=> '%s harus diisi'));
+		$valid->set_rules('nama_pelanggan','Nama lengkap','required|max_length[50]',
+			array(	'required'		=> '%s harus diisi',
+					'max_length'	=> '%s terlalu panjang'));
 
 		$valid->set_rules('email','Email','required|valid_email|is_unique[pelanggan.email]',
 			array(	'required'		=> '%s harus diisi',
@@ -35,18 +36,21 @@ class Registrasi extends CI_Controller {
 
 		if($valid->run()===FALSE) {
 		// End validasi
-		$site = $this->konfigurasi_model->listing();
-		$data = array(	'title'		=> 'Registrasi Pelanggan', 
-						'site'		=> $site,
-						'isi'		=> 'registrasi/list_new'
-					);
-		$this->load->view('layout/wrapper_login_page', $data, FALSE);
+
+			$site = $this->konfigurasi_model->listing();
+			$data = array(	'title'		=> 'Registrasi Pelanggan', 
+							'site'		=> $site,
+							'isi'		=> 'registrasi/list_new'
+						);
+			$this->load->view('layout/wrapper_login_page', $data, FALSE);
 		// Masuk database
-		}else{
+		} else {
 			$i = $this->input;
+			$nama_pelanggan = $this->security->xss_clean($i->post('nama_pelanggan'));  
+			$email_pendaftar = $this->security->xss_clean($i->post('email'));  
 			$data = array(	'status_pelanggan'	=> 'Pending',
-							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
-							'email'				=> $i->post('email'),
+							'nama_pelanggan'	=> $nama_pelanggan,
+							'email'				=> $email_pendaftar,
 							'password'			=> SHA1($i->post('password')),
 							'status_reseller'	=> $i->post('status_reseller'),
 							'tanggal_daftar'	=> date('Y-m-d H:i:s')
@@ -56,7 +60,6 @@ class Registrasi extends CI_Controller {
 			//Enkripsi id
 			$encrypted_id = md5($id);
 
-			$email_pendaftar = $i->post('email');
 			$kirim_email = $this->kirim_email($encrypted_id, $email_pendaftar);
 			
 			// $this->email->send()
@@ -91,9 +94,6 @@ class Registrasi extends CI_Controller {
 	// Kirim Email
 	private function kirim_email($encrypted_id, $subject)
 	{
-		// $email_sender 	= "wewcoklat.noreply@gmail.com";
-		// $email_password	= "coklatenak";
-		// $smtp_host 		= "ssl://smtp.gmail.com";
 
 		$this->config->load('wew_email', TRUE);
 		$smtp_host = $this->config->item('smtp_host', 'wew_email');

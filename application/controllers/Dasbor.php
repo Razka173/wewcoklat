@@ -80,49 +80,93 @@ class Dasbor extends CI_Controller {
 		$valid->set_rules('nama_pelanggan','Nama lengkap','required',
 			array(	'required'		=> '%s harus diisi'));
 
-		$valid->set_rules('alamat','Alamat lengkap','required',
-			array(	'required'		=> '%s harus diisi'));
-
 		$valid->set_rules('telepon','Nomor Telepon','required',
 			array(	'required'		=> '%s harus diisi'));
-
-		// $valid->set_rules('password','Password','required|min_length[6]',
-		// 	array(	'required'		=> '%s harus diisi',
-		// 			'min_length'	=> '%s minimal 6 karakter'));
 
 		if($valid->run()===FALSE) {
 		// End validasi
 
-		$data = array(	'title'				=> 'Profil Saya',
-						'pelanggan'			=> $pelanggan,
-						'isi'				=> 'dasbor/profil'
-					);
-		$this->load->view('layout/wrapper', $data, FALSE);	
+			$data = array(	'title'				=> 'Profil Saya',
+							'pelanggan'			=> $pelanggan,
+							'isi'				=> 'dasbor/profil'
+						);
+			$this->load->view('layout/wrapper', $data, FALSE);
+
 		// Masuk database
-		}else{
+		} else {
 			$i = $this->input;
-			// Kalau password lebih dari 6 karakter, maka password diganti
-			if( strlen($i->post('password')) >= 6 ) {
-				$data = array(	'id_pelanggan'		=> $id_pelanggan,
-								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
-								'password'			=> SHA1($i->post('password')),
-								'telepon'			=> $i->post('telepon'),
-								'alamat'			=> $i->post('alamat'),
-							);
-			}else{
-				// Kalau password kurang dari 6 maka password ga diganti
-				$data = array(	'id_pelanggan'		=> $id_pelanggan,
-								'nama_pelanggan'	=> $i->post('nama_pelanggan'),
-								'telepon'			=> $i->post('telepon'),
-								'alamat'			=> $i->post('alamat'),
-							);
-			}
+			$data = array(	'id_pelanggan'		=> $id_pelanggan,
+							'nama_pelanggan'	=> $i->post('nama_pelanggan'),
+							'telepon'			=> $i->post('telepon'),
+						);
 			// End data update
 			$this->pelanggan_model->edit($data);
 			$this->session->set_flashdata('sukses', 'Update Profil berhasil');
 			redirect(base_url('dasbor/profil'),'refresh');
 		}
 		// End masuk database
+	}
+
+	// Ganti password
+	public function password(){
+		// Ambil data login id_pelanggan dari SESSION
+		$id_pelanggan 		= $this->session->userdata('id_pelanggan');
+		$email 				= $this->session->userdata('emai;');
+		$pelanggan 			= $this->pelanggan_model->detail($id_pelanggan);
+
+		// Validasi input
+		$valid = $this->form_validation;
+
+		// $valid->set_rules('old_password','Password Lama','required',
+		// 	array(	'required'		=> '%s harus diisi'));
+
+		$valid->set_rules('new_password','Password Baru','required|min_length[6]',
+			array(	'required'		=> '%s harus diisi',
+					'min_length'	=> '%s minimal 6 karakter'));
+
+		$valid->set_rules('cfnew_password','Konfirmasi Password','required|matches[new_password]',
+			array(	'required'		=> '%s harus diisi',
+					'matches'		=> '%s tidak sama dengan password'));
+
+		if($valid->run()===FALSE) {
+		// End validasi
+
+			$data = array(	'title'				=> 'Ganti Password',
+							'pelanggan'			=> $pelanggan,
+							'isi'				=> 'dasbor/password'
+						);
+			$this->load->view('layout/wrapper', $data, FALSE);
+
+		// Masuk database
+		} else {
+			$i = $this->input;
+			$old_password = $i->post('old_password');
+			$check = $this->pelanggan_model->login($email, $old_password);
+
+			if($check){
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'password'			=> SHA1($i->post('new_password')),
+							);
+				// End data update
+				$this->pelanggan_model->edit($data);
+				$this->session->set_flashdata('sukses', 'Password berhasil diganti');
+				redirect(base_url('dasbor/profil'),'refresh');
+			} elseif( $pelanggan->oauth_provider=='google' and empty($pelanggan->password) and !empty($old_password) ) {
+				$this->session->set_flashdata('warning', 'Anda pengguna google dan belum memiliki password. Kosongkan Kolom Password Lama untuk membuat password.');
+				redirect(base_url('dasbor/password'),'refresh');
+			} elseif( $pelanggan->oauth_provider=='google' ) {
+				$data = array(	'id_pelanggan'		=> $id_pelanggan,
+								'password'			=> SHA1($i->post('new_password')),
+							);
+				// End data update
+				$this->pelanggan_model->edit($data);
+				$this->session->set_flashdata('sukses', 'Password berhasil diganti');
+				redirect(base_url('dasbor/profil'),'refresh');
+			} else {
+				$this->session->set_flashdata('warning', 'Password lama anda salah.');
+				redirect(base_url('dasbor/password'),'refresh');
+			}
+		}
 	}
 
 	// Konfirmasi pembayaran

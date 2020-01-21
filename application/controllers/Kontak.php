@@ -30,12 +30,15 @@ class Kontak extends CI_Controller {
 						);
 			$this->load->view('layout/wrapper', $data, FALSE);
 		
-		}else{
+		} else {  
 			// Masuk database
 			$i = $this->input;
-			$data = array(	'nama'		=> $i->post('nama'),
-							'email'		=> $i->post('email'),
-							'pesan'		=> $i->post('pesan')
+			$clean_nama = $this->security->xss_clean($i->post('nama')); 
+			$clean_email = $this->security->xss_clean($i->post('email'));
+			$clean_pesan = $this->security->xss_clean($i->post('pesan'));
+			$data = array(	'nama'		=> $clean_nama,
+							'email'		=> $clean_email,
+							'pesan'		=> $clean_pesan
 						);
 			$this->kontak_model->tambah($data);
 			$this->session->set_flashdata('sukses', 'Pesan Anda Telah Dikirim, Terima Kasih Sudah Menghubungi Kami');

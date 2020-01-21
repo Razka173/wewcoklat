@@ -44,7 +44,7 @@
 	}
 }
 </style>
-
+<!-- ####################################################################################################### -->
 <!-- ISI -->
 <section class="bgwhite p-t-55 p-b-65">
 <div class="container m-l-30">
@@ -60,6 +60,7 @@
 	
 		<!-- KONTEN SEBELAH KANAN -->
 		<div class="col-sm-6 col-md-8 col-lg-10 p-b-50 konten">
+<!-- ####################################################################################################### -->
 			<h2><?php echo $title ?></h2>
 			<hr>
 			<p>Berikut adalah riwayat belanja Anda</p>
@@ -86,7 +87,7 @@
 					<tr>
 						<td><?php echo $i ?></td>
 						<td><?php echo $header_transaksi->kode_transaksi ?></td>
-						<td><?php echo date('d-M-Y',strtotime($header_transaksi->tanggal_transaksi))?></td>
+						<td><?php echo date('d-m-Y',strtotime($header_transaksi->tanggal_transaksi))?></td>
 						<td><?php echo number_format($header_transaksi->jumlah_transaksi) ?></td>
 						<td><?php echo $header_transaksi->total_item ?></td>
 						<td><?php echo $header_transaksi->status_bayar ?></td>

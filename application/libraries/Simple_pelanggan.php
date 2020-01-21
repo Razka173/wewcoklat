@@ -17,6 +17,7 @@ class Simple_pelanggan
 	{
 		$check = $this->CI->pelanggan_model->login($email, $password);
 		$second_check = $this->CI->pelanggan_model->login_google($email);
+		$third_check = $this->CI->pelanggan_model->login_facebook($email);
 		// Jika ada data user, maka create session login
 		if($check) {
 			$id_pelanggan		= $check->id_pelanggan;
@@ -36,6 +37,19 @@ class Simple_pelanggan
 			$nama_pelanggan		= $second_check->nama_pelanggan;
 			$status_pelanggan	= $second_check->status_pelanggan;
 			$status_reseller	= $second_check->status_reseller;
+			// Create session
+			$this->CI->session->set_userdata('id_pelanggan',$id_pelanggan);
+			$this->CI->session->set_userdata('nama_pelanggan',$nama_pelanggan);
+			$this->CI->session->set_userdata('email',$email);
+			$this->CI->session->set_userdata('status_pelanggan',$status_pelanggan);
+			$this->CI->session->set_userdata('status_pelanggan',$status_reseller);
+			// redirect ke halaman yang diproteksi
+			redirect(base_url('dasbor'),'refresh');
+		} elseif($third_check){
+			$id_pelanggan		= $third_check->id_pelanggan;
+			$nama_pelanggan		= $third_check->nama_pelanggan;
+			$status_pelanggan	= $third_check->status_pelanggan;
+			$status_reseller	= $third_check->status_reseller;
 			// Create session
 			$this->CI->session->set_userdata('id_pelanggan',$id_pelanggan);
 			$this->CI->session->set_userdata('nama_pelanggan',$nama_pelanggan);
