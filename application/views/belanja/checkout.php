@@ -2,6 +2,14 @@
 	.table-shopping-cart {
 		overflow-x: auto;
 	}
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+	.container {
+		padding-left: 2px;
+		margin-left: 2px;
+	}
+	.konten {
+		font-size: 13px;
+	}
 </style>
 
 <!-- Cart -->
@@ -9,7 +17,7 @@
 <div class="container">
 <!-- Cart item -->
 <div class="container-table-cart pos-relative">
-<div class="wrap-table-shopping-cart bgwhite" style="max-width: 100%; overflow-x: hidden;">
+<div class="wrap-table-shopping-cart bgwhite konten" style="max-width: 100%;">
 
 	<h1><?php echo $title ?></h1>
 	<hr>
@@ -30,7 +38,7 @@
 	}
 	?>
 
-	<table class="table-shopping-cart m-l-20" style="overflow-x: auto;">
+	<table class="table-shopping-cart m-l-20" style="overflow-x: hidden;">
 		<tr class="table-head">
 			<th class="text-center">GAMBAR</th>
 			<th class="text-center">PRODUK</th>
@@ -58,11 +66,11 @@
 				</div>
 			</td>
 			<td class="text-center"><?php echo $keranjang['name'] ?></td>
-			<td class="text-center">Rp. <?php echo number_format($keranjang['price'],'0',',','.') ?></td>
+			<td class="text-center">Rp. <?php echo number_format($keranjang['price'],'0',',',',') ?></td>
 			<td class="text-center"><?php echo $keranjang['qty'] ?></td>
 			<td class="text-center">Rp. 
 				<?php $sub_total = $keranjang['price'] * $keranjang['qty'];
-				echo number_format($sub_total,'0',',','.');
+				echo number_format($sub_total,'0',',',',');
 				 ?>
 			</td>
 			<td class="text-center">
@@ -192,7 +200,7 @@
 				<?php } ?>
 			</select>
 			<?php } else { ?>
-				<a href="<?php echo base_url('dasbor/alamat') ?>" class="btn btn-success">Tambah Alamat</a>
+				<a href="<?php echo base_url('alamat/tambah') ?>" class="btn btn-success">Tambah Alamat</a>
 			<?php } ?>
 		</div>
 

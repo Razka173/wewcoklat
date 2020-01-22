@@ -169,6 +169,24 @@ class Dasbor extends CI_Controller {
 		}
 	}
 
+	// HALAMAN BAYAR
+	public function bayar($kode_transaksi)
+	{
+		// Ambil data login id_pelanggan dari SESSION
+		$id_pelanggan		= $this->session->userdata('id_pelanggan');
+		$pelanggan 			= $this->pelanggan_model->detail($id_pelanggan);
+		$rekening 			= $this->rekening_model->listing();
+		$header_transaksi 	= $this->header_transaksi_model->kode_transaksi($kode_transaksi);
+
+		$data = array(	'title'				=> 'Pembayaran Pesanan',
+						'rekening'			=> $rekening,
+						'pelanggan'			=> $pelanggan,
+						'header_transaksi'	=> $header_transaksi,
+						'isi'				=> 'dasbor/bayar'
+					);
+		$this->load->view('layout/wrapper', $data, FALSE);
+	}
+
 	// Konfirmasi pembayaran
 	public function konfirmasi($kode_transaksi)
 	{
@@ -180,19 +198,13 @@ class Dasbor extends CI_Controller {
 		// Validasi input
 		$valid 		= $this->form_validation;
 
-		$valid->set_rules('nama_bank','Nama Bank','required',
-			array(	'required'		=> '%s harus diisi'));
-
-		$valid->set_rules('rekening_pembayaran','Nomor Rekening','required',
-			array(	'required'		=> '%s harus diisi'));
-
-		$valid->set_rules('rekening_pelanggan','Nama Pemilik Rekening','required',
-			array(	'required'		=> '%s harus diisi'));
-
 		$valid->set_rules('tanggal_bayar','Tanggal Pembayaran','required',
 			array(	'required'		=> '%s harus diisi'));
 
 		$valid->set_rules('jumlah_bayar','Jumlah Pembayaran','required',
+			array(	'required'		=> '%s harus diisi'));
+
+		$valid->set_rules('id_rekening_pelanggan','Metode Pembayaran','required',
 			array(	'required'		=> '%s harus diisi'));
 		
 		if( $valid->run() ) {
@@ -206,10 +218,9 @@ class Dasbor extends CI_Controller {
 				$config['max_height']  		= '3048';
 			
 				$this->load->library('upload', $config);
-			
-				if ( !$this->upload->do_upload('bukti_bayar')) {
 				
-					// End validasi
+				// End validasi
+				if ( !$this->upload->do_upload('bukti_bayar')) {
 
 					$data = array(	'title'					=> 'Konfirmasi Pembayaran',
 									'header_transaksi'		=> $header_transaksi,
@@ -241,35 +252,54 @@ class Dasbor extends CI_Controller {
 					// End create thumbnail
 
 					$i = $this->input;
-
+					if( $i->post('id_rekening_pelanggan')=='dana'){
+						$nama_bank = 'via DANA';
+						$nomor_rekening = '-';
+						$nama_pemilik = '-';
+					} else {
+						$rekening_pelanggan_detail = $this->rekening_pelanggan_model->detail($i->post('id_rekening_pelanggan'));
+						$nama_bank = $rekening_pelanggan_detail->nama_bank;
+						$nomor_rekening = $rekening_pelanggan_detail->nomor_rekening;
+						$nama_pemilik = $rekening_pelanggan_detail->nama_pemilik;
+					}
+					
 					$data = array(	'id_header_transaksi'	=> $header_transaksi->id_header_transaksi,
 									'status_bayar'			=> 'Konfirmasi',
 									'jumlah_bayar'			=> $i->post('jumlah_bayar'),
-									'rekening_pembayaran'	=> $i->post('rekening_pembayaran'),
-									'rekening_pelanggan'	=> $i->post('rekening_pelanggan'),
+									'nama_bank'				=> $nama_bank,
+									'rekening_pembayaran'	=> $nomor_rekening,
+									'rekening_pelanggan'	=> $nama_pemilik,
 									'bukti_bayar'			=> $upload_gambar['upload_data']['file_name'],
 									'id_rekening'			=> $i->post('id_rekening'),
-									'tanggal_bayar'			=> $i->post('tanggal_bayar'),
-									'nama_bank'				=> $i->post('nama_bank'),
+									'tanggal_bayar'			=> $i->post('tanggal_bayar'),	
 								);
 					$this->header_transaksi_model->edit($data);
 					$this->session->set_flashdata('sukses', 'Unggah Bukti Pembayaran Berhasil, Silahkan Menunggu Untuk Konfirmasi Bukti Bayar');
 					redirect(base_url('dasbor'),'refresh');
 				}
 			}else {
-				// Edit produk tanpa ganti gambar
+				// Edit tanpa ganti gambar
 				$i = $this->input;
-				// SLUG PRODUK
-				
+				if( $i->post('id_rekening_pelanggan')=='dana'){
+					$nama_bank = 'via DANA';
+					$nomor_rekening = '-';
+					$nama_pemilik = '-';
+				} else {
+					$rekening_pelanggan_detail = $this->rekening_pelanggan_model->detail($i->post('id_rekening_pelanggan'));
+					$nama_bank = $rekening_pelanggan_detail->nama_bank;
+					$nomor_rekening = $rekening_pelanggan_detail->nomor_rekening;
+					$nama_pemilik = $rekening_pelanggan_detail->nama_pemilik;
+				}
 				$data = array(	'id_header_transaksi'	=> $header_transaksi->id_header_transaksi,
 								'status_bayar'			=> 'Konfirmasi',
 								'jumlah_bayar'			=> $i->post('jumlah_bayar'),
-								'rekening_pembayaran'	=> $i->post('rekening_pembayaran'),
-								'rekening_pelanggan'	=> $i->post('rekening_pelanggan'),
+								'nama_bank'				=> $nama_bank,
+								'rekening_pembayaran'	=> $nomor_rekening,
+								'rekening_pelanggan'	=> $nama_pemilik,
 								// 'bukti_bayar'		=> $upload_gambar['upload_data']['file_name'],
 								'id_rekening'			=> $i->post('id_rekening'),
 								'tanggal_bayar'			=> $i->post('tanggal_bayar'),
-								'nama_bank'				=> $i->post('nama_bank'),
+
 							);
 				$this->header_transaksi_model->edit($data);
 				$this->session->set_flashdata('sukses', 'Konfirmasi Pembayaran Berhasil');

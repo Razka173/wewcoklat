@@ -14,6 +14,7 @@ class Belanja extends CI_Controller {
 		$this->load->model('header_transaksi_model');
 		$this->load->model('transaksi_model');
 		$this->load->model('alamat_pelanggan_model');
+		$this->load->model('user_model');
 		// load helper random string
 		$this->load->helper('string');
 	}
@@ -24,7 +25,7 @@ class Belanja extends CI_Controller {
 		$keranjang	= $this->cart->contents();
 		
 		if(empty($keranjang)){
-			$this->session->set_flashdata('sukses','Keranjang Belanja Kosong');
+			$this->session->set_flashdata('keranjang','Keranjang Belanja Kosong');
 		}
 
 		$data = array(	'title'		=> 'Keranjang Belanja',
@@ -59,7 +60,7 @@ class Belanja extends CI_Controller {
 
 			$keranjang	= $this->cart->contents();
 			if(empty($keranjang)){
-				$this->session->set_flashdata('sukses','Keranjang Belanja Kosong');
+				$this->session->set_flashdata('keranjang','Keranjang Belanja Kosong');
 				redirect(base_url('belanja'),'refresh');
 			}
 
@@ -151,6 +152,11 @@ class Belanja extends CI_Controller {
 									'tanggal_transaksi'	=> $i->post('tanggal_transaksi')
 								);
 					$this->transaksi_model->tambah($data);
+					// KIRIM EMAIL DIBAWAH INI
+					$email_admin = $this->user_model->listing();
+					foreach( $email_admin as $email_admin){
+						$this->kirim_email($data, $email_admin->email);
+					}
 				}
 				// End proses masuk ke tabel transaksi
 				// Setelah masuk ke tabel transaksi, maka keranjang dikosongkan lagi
@@ -165,6 +171,49 @@ class Belanja extends CI_Controller {
 			$this->session->set_flashdata('sukses', 'Silahkan login atau registrasi terlebih dahulu');
 			redirect(base_url('masuk'),'refresh');
 		}
+	}
+
+	// KIRIM EMAIL KETIKA PELANGGAN CHECKOUT
+	private function kirim_email($data, $email_penerima)
+	{
+		$this->config->load('wew_email', TRUE);
+		$smtp_host = $this->config->item('smtp_host', 'wew_email');
+		$smtp_user = $this->config->item('smtp_user', 'wew_email');
+		$smtp_pass = $this->config->item('smtp_pass', 'wew_email');
+
+		// Verifikasi Email Pelanggan
+		$this->load->library('email');
+	    $config = array();
+	    $config['smtp_host']	= $smtp_host; // Pengaturan SMTP
+	    $config['smtp_user']	= $smtp_user; // isi dengan email kamu
+	    $config['smtp_pass']	= $smtp_pass; // isi dengan password kamu
+	    $config['charset'] 		= 'utf-8';
+	    $config['useragent'] 	= 'Codeigniter';
+	    $config['protocol']		= "smtp";
+	    $config['mailtype']		= "html";
+	    $config['smtp_port']	= "465";
+	    $config['smtp_timeout']	= "400";
+	    $config['crlf']			="\r\n"; 
+	    $config['newline']		="\r\n"; 
+	    $config['wordwrap'] 	= TRUE;
+	    // memanggil library email dan set konfigurasi untuk pengiriman email
+	   
+	    $this->email->initialize($config);
+	    //konfigurasi pengiriman
+	    
+    	$this->email->from($config['smtp_user']);
+	    $this->email->to($email_penerima);
+	    $this->email->subject("Pemberitahuan Transaksi");
+	    $this->email->message(
+	     'Ada transaksi masuk silahkan cek di link berikut ini
+	     <br><a href="'.base_url('admin/transaksi/detail/').$data['kode_transaksi'].'">Halaman Admin</a>'
+	    );
+	    if($this->email->send()){
+    		return true;
+	    }else{
+	    	return false;
+	    }
+	    return $this->email->send();
 	}
 
 	// Tambahkan ke keranjang belanja

@@ -38,7 +38,7 @@
 			<div class="btn-group">
 				<a href="<?php echo base_url('admin/transaksi/pdf/'.$header_transaksi->kode_transaksi) ?>" class="btn btn-success btn-sm"><i class="fa fa-file-pdf"></i> Unduh PDF</a>
 				<a href="<?php echo base_url('admin/transaksi/kirim/'.$header_transaksi->kode_transaksi) ?>" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-print"></i> Pengiriman</a>
-				<a href="<?php echo base_url('admin/transaksi/word/'.$header_transaksi->kode_transaksi) ?>" class="btn btn-warning btn-sm"><i class="fa fa-file-word"></i> Word</a>
+				<!-- <a href="<?php echo base_url('admin/transaksi/word/'.$header_transaksi->kode_transaksi) ?>" class="btn btn-warning btn-sm"><i class="fa fa-file-word"></i> Word</a> -->
 			</div>
 		</td>
 	</tr>

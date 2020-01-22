@@ -1,9 +1,22 @@
+<style>
+	.konten{
+		overflow-x: hidden;
+	}
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+	.container {
+		padding-left: 2px;
+		margin-left: 2px;
+	}
+	.konten{
+		overflow-x: auto;
+	}
+</style>
 <!-- Cart -->
 <section class="cart bgwhite p-t-70 p-b-100">
 <div class="container">
 <!-- Cart item -->
-<div class="container-table-cart pos-relative">
-<div class="wrap-table-shopping-cart bgwhite" style="max-width: 100%; overflow-x: hidden;">
+<div class="container-table-cart pos-relative konten">
+<div class="wrap-table-shopping-cart bgwhite konten" style="max-width: 100%;">
 
 	<h1><?php echo $title ?></h1>
 	<hr>
@@ -11,9 +24,16 @@
 	<br><br>
 	
 	<!-- NOTIFIKASI SUKSES -->
-	<?php if($this->session->flashdata('sukses')) {
+	<?php 
+	if($this->session->flashdata('sukses')) {
 		echo '<div class="alert alert-warning">';
 		echo $this->session->flashdata('sukses');
+		echo '</div>';
+	}
+
+	if($this->session->flashdata('keranjang')) {
+		echo '<div class="alert alert-warning">';
+		echo $this->session->flashdata('keranjang');
 		echo '</div>';
 	} 
 	?>
@@ -46,7 +66,7 @@
 				</div>
 			</td>
 			<td class="text-center"><?php echo $keranjang['name'] ?></td>
-			<td class="text-center">Rp. <?php echo number_format($keranjang['price'],'0',',','.') ?></td>
+			<td class="text-center">Rp. <?php echo number_format($keranjang['price'],'0',',',',') ?></td>
 			<td class="text-center"><?php echo $keranjang['qty'] ?></td>
 			<td class="text-center">Rp. 
 				<?php $sub_total = $keranjang['price'] * $keranjang['qty'];

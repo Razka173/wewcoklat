@@ -28,14 +28,26 @@ else{
 	<div id="caption"></div>
 </div>
 
-<div class="form-inline">
-	<label class="col-md-2 control-label" for="status_bayar">Status</label>
+<div class="form-inline mt-3">
+	<label class="col-md-2 control-label" for="status_bayar">Status Bayar</label>
 	<div class="col-md-5">
 		<select name="status_bayar" id="status_bayar" class="form-control">
 			<option value="Konfirmasi">Konfirmasi</option>
 			<option value="Sudah Bayar" <?php if($header_transaksi->status_bayar=="Sudah Bayar") { echo "selected"; }?>>Sudah Bayar</option>
 			<option value="Belum Bayar" <?php if($header_transaksi->status_bayar=="Belum Bayar") { echo "selected"; }?>>Belum Bayar</option>
 			<option value="Bukti Tidak Valid" <?php if($header_transaksi->status_bayar=="Bukti Tidak Valid") { echo "selected"; }?>>Bukti Bayar Tidak Valid</option>
+		</select>
+	</div>
+</div>
+
+<div class="form-inline mt-3">
+	<label class="col-md-2 control-label" for="status_pesanan">Status Pesanan</label>
+	<div class="col-md-5">
+		<select name="status_pesanan" id="status_pesanan" class="form-control">
+			<option value="Menunggu Pembayaran">Menunggu Pembayaran</option>
+			<option value="Dalam Pengiriman" <?php if($header_transaksi->status_pesanan=="Dalam Pengiriman") { echo "selected"; }?>>Dalam Pengiriman</option>
+			<option value="Terkirim" <?php if($header_transaksi->status_pesanan=="Terkirim") { echo "selected"; }?>>Terkirim</option>
+			<option value="Dibatalkan" <?php if($header_transaksi->status_pesanan=="Dibatalkan") { echo "selected"; }?>>Dibatalkan</option>
 		</select>
 	</div>
 </div>

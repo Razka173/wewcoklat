@@ -52,7 +52,7 @@ echo form_hidden('redirect_page', str_replace('index.php/','',current_url()));
 			</a>
 
 			<span class="block2-price m-text6 p-r-5">
-				IDR <?php echo number_format($produk->harga,'0',',','.') ?>
+				IDR <?php echo number_format($produk->harga,'0',',',',') ?>
 			</span>
 		</div>
 		

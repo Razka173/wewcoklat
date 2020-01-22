@@ -1,4 +1,4 @@
-`<style>
+<style>
 	.container {
 		max-width: 1240px;
 	}
@@ -79,6 +79,7 @@
 						<th>TOTAL</th>
 						<th width="10%">ITEM</th>
 						<th>STATUS BAYAR</th>
+						<th>STATUS PESANAN</th>
 						<th>ACTION</th>
 					</tr>
 				</thead>
@@ -91,6 +92,7 @@
 						<td><?php echo number_format($header_transaksi->jumlah_transaksi) ?></td>
 						<td><?php echo $header_transaksi->total_item ?></td>
 						<td><?php echo $header_transaksi->status_bayar ?></td>
+						<td><?php echo $header_transaksi->status_pesanan ?></td>
 						<td>
 							<div class="btn-group">
 								<a href="<?php echo base_url('dasbor/detail/'.$header_transaksi->kode_transaksi) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i> Detail</a>

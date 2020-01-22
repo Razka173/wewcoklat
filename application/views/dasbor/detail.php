@@ -1,15 +1,36 @@
+<style>
+	.container {
+		max-width: 1240px;
+	}
+	.konten{
+		overflow-x: auto;
+	}
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+	.container {
+		padding-left: 2px;
+		margin-left: 2px;
+	}
+	.menu {
+		/*background-color: lightblue;*/
+		margin: -50px 0px -25px 50px;
+		padding: 0px;
+	}
+</style>
 <!-- Content page -->
 <section class="bgwhite p-t-55 p-b-65">
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-md-3 col-lg-3 p-b-50">
+
+		<!-- KONTEN SEBELAH KIRI -->
+		<div class="col-sm-6 col-md-3 col-lg-3 p-b-50 menu">
 			<div class="leftbar p-r-20 p-r-0-sm">
-				<!--  -->
+				<!-- MENU -->
 				<?php include('menu.php') ?>
 			</div>
 		</div>
 
-		<div class="col-sm-6 col-md-9 col-lg-9 p-b-50">
+		<!-- KONTEN SEBELAH KANAN -->
+		<div class="col-sm-6 col-md-9 col-lg-9 p-b-50 konten">
 
 				<h2><?php echo $title ?></h2>
 				<hr>
@@ -39,6 +60,10 @@
 					<tr>
 						<td>Status Bayar</td>
 						<td>: <?php echo $header_transaksi->status_bayar ?></td>
+					</tr>
+					<tr>
+						<td>Status Pesanan</td>
+						<td>: <?php echo $header_transaksi->status_pesanan ?></td>
 					</tr>
 				</tbody>
 			</table>
@@ -77,6 +102,10 @@
 				</p>
 
 			<?php } ?>
+
+			<a href="<?php echo base_url('dasbor/belanja') ?>" class="btn btn-success">
+				Kembali
+			</a>
 
 			
 		</div>

@@ -2,6 +2,22 @@
     .container {
         max-width: 1240px;
     }
+    .konten{
+        overflow-x: auto;
+    }
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+    .container {
+        padding-left: 2px;
+        margin-left: 2px;
+    }
+    .menu {
+        /*background-color: lightblue;*/
+        margin: -50px 0px -25px 50px;
+        padding: 0px;
+    }
+    .konten{
+        font-size: 13px;
+    }
 </style>
 
 <!-- ISI -->

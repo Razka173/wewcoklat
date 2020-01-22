@@ -111,7 +111,7 @@ $nav_produk_mobile	= $this->konfigurasi_model->nav_produk();
 							</a>
 
 							<span class="header-cart-item-info">
-								<?php echo $keranjang['qty'] ?> x Rp. <?php echo number_format($keranjang['price'],'0',',','.') ?>: Rp. <?php echo number_format($keranjang['subtotal'],'0',',','.') ?>
+								<?php echo $keranjang['qty'] ?> x Rp. <?php echo number_format($keranjang['price'],'0',',','.') ?>: Rp. <?php echo number_format($keranjang['subtotal'],'0',',',',') ?>
 							</span>
 						</div>
 					</li>
@@ -207,7 +207,7 @@ $nav_produk_mobile	= $this->konfigurasi_model->nav_produk();
 							</a>
 
 							<span class="header-cart-item-info">
-								<?php echo $keranjang_mobile['qty'] ?> x Rp. <?php echo number_format($keranjang_mobile['price'],'0',',','.') ?>
+								<?php echo $keranjang_mobile['qty'] ?> x Rp. <?php echo number_format($keranjang_mobile['price'],'0',',',',') ?>
 							</span>
 						</div>
 					</li>

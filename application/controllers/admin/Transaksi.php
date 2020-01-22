@@ -50,6 +50,9 @@ class Transaksi extends CI_Controller {
 		$valid->set_rules('status_bayar','Status Bayar','required',
 			array(	'required'	=> '%s harus diisi'));
 
+		$valid->set_rules('status_pesanan','Status Pesanan','required',
+			array(	'required'	=> '%s harus diisi'));
+
 		if($valid->run()===FALSE){
 			// End Validasi
 			$data = array(	'title'				=> 'Update Status Transaksi',
@@ -62,15 +65,60 @@ class Transaksi extends CI_Controller {
 			// Masuk database
 			$i = $this->input;
 			$data = array(	'id_header_transaksi'	=> $header_transaksi->id_header_transaksi,
-							'status_bayar'			=> $i->post('status_bayar')
+							'status_bayar'			=> $i->post('status_bayar'),
+							'status_pesanan'		=> $i->post('status_pesanan')
 						);
 			$this->header_transaksi_model->edit($data);
+			// KIRIM EMAIL DISINI
+			$this->kirim_email($data, $header_transaksi->email);
 			$this->session->set_flashdata('sukses', 'Status bayar telah di update');
 			redirect(base_url('admin/transaksi'),'refresh');
 		}
-		// End masuk database
+		// End masuk database	
+	}
 
-			
+	// KIRIM EMAIL KETIKA ADMIN UPDATE STATUS
+	private function kirim_email($data, $email_penerima)
+	{
+		$this->config->load('wew_email', TRUE);
+		$smtp_host = $this->config->item('smtp_host', 'wew_email');
+		$smtp_user = $this->config->item('smtp_user', 'wew_email');
+		$smtp_pass = $this->config->item('smtp_pass', 'wew_email');
+
+		// Verifikasi Email Pelanggan
+		$this->load->library('email');
+	    $config = array();
+	    $config['smtp_host']	= $smtp_host; // Pengaturan SMTP
+	    $config['smtp_user']	= $smtp_user; // isi dengan email kamu
+	    $config['smtp_pass']	= $smtp_pass; // isi dengan password kamu
+	    $config['charset'] 		= 'utf-8';
+	    $config['useragent'] 	= 'Codeigniter';
+	    $config['protocol']		= "smtp";
+	    $config['mailtype']		= "html";
+	    $config['smtp_port']	= "465";
+	    $config['smtp_timeout']	= "400";
+	    $config['crlf']			="\r\n"; 
+	    $config['newline']		="\r\n"; 
+	    $config['wordwrap'] 	= TRUE;
+	    // memanggil library email dan set konfigurasi untuk pengiriman email
+	   
+	    $this->email->initialize($config);
+	    //konfigurasi pengiriman
+	    $detail_transaksi = $this->header_transaksi_model->detail($data['id_header_transaksi']);
+	    
+    	$this->email->from($config['smtp_user']);
+	    $this->email->to($email_penerima);
+	    $this->email->subject("Pemberitahuan Transaksi");
+	    $this->email->message(
+	     'Status pesanan anda '.$data['status_pesanan'].'
+	     <br><a href="'.base_url('dasbor/detail/').$detail_transaksi->kode_transaksi.'">Detail Pesanan</a>'
+	    );
+	    if($this->email->send()){
+    		return true;
+	    }else{
+	    	return false;
+	    }
+	    return $this->email->send();
 	}
 
 	// Cetak
