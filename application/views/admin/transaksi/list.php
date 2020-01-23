@@ -20,6 +20,7 @@
 				Telepon: <?php echo $header_transaksi->telepon ?>
 				<br>Email: <br><?php echo nl2br($header_transaksi->email) ?>
 				<br>Alamat Kirim: <br><?php echo nl2br($header_transaksi->alamat) ?>
+				<br>Status Pesanan: <br><?php echo $header_transaksi->status_pesanan ?>
 			</small>
 		</td>
 		<td><?php echo $header_transaksi->kode_transaksi ?></td>

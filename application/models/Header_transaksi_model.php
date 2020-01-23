@@ -21,7 +21,7 @@ class Header_transaksi_model extends CI_Model {
 		$this->db->join('pelanggan', 'pelanggan.id_pelanggan = header_transaksi.id_pelanggan', 'left');
 		// End join
 		$this->db->group_by('header_transaksi.id_header_transaksi');
-		$this->db->order_by('id_header_transaksi', 'asc');
+		$this->db->order_by('id_header_transaksi', 'desc');
 		$query = $this->db->get();
 		return $query->result();
 	}

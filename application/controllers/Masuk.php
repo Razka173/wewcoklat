@@ -92,7 +92,7 @@ class Masuk extends CI_Controller {
 		if ( $user ) {
 			$user_token = $this->token_model->detail($token);
 
-			if ( $user_token ) {
+			if ( $user_token and $user_token->email == $email) {
 				// Reset password
 				$this->session->set_userdata('reset_email', $email);
 				$this->ganti_password();
@@ -136,7 +136,7 @@ class Masuk extends CI_Controller {
 			$i = $this->input;
 			$password = SHA1($i->post('password'));
 			$email = $this->session->userdata('reset_email');
-			$data = array(	'email'				=> $email_pendaftar,
+			$data = array(	'email'				=> $email,
 							'password'			=> $password
 						);
 			$this->pelanggan_model->edit_by_email($data);

@@ -28,6 +28,11 @@ class Facebook_user extends CI_Model {
                 //get user ID
                 $userID = $prevResult['id_pelanggan'];
             }else{
+                // Jika pelanggan sudah daftar di website tanpa menggunakan google login
+                if($this->checkEmail($userData['email']) == true){
+                    return false;
+                }
+
                 //insert user data
                 $userData['status_pelanggan']   = 'Member';
                 $userData['status_reseller']    = 'Tidak';
@@ -42,5 +47,15 @@ class Facebook_user extends CI_Model {
         
         //return user ID
         return $userID?$userID:FALSE;
+    }
+
+    // Check If Email Exist
+    public function checkEmail($email){
+        $this->db->select('*');
+        $this->db->from('pelanggan');
+        $this->db->where('email', $email);
+        $this->db->order_by('id_pelanggan', 'desc');
+        $query = $this->db->get();
+        return $query->row();
     }
 }

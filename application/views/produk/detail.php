@@ -67,6 +67,14 @@
 			IDR <?php echo number_format($produk->harga,'0',',',',') ?>
 		</span>
 
+		<p class="s-text3 p-t-10">
+			Ukuran Produk : <?php echo $produk->ukuran ?>
+		</p>
+
+		<p class="s-text3 p-t-10">
+			Berat Produk : <?php echo $produk->berat ?>
+		</p>
+
 		<p class="s-text8 p-t-10">
 			<?php echo $produk->keterangan ?>
 		</p>

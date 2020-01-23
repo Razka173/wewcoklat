@@ -53,6 +53,7 @@ class Google_user extends CI_Model {
         return $userID?$userID:false;
     }
 
+    // Check if email exist
     public function checkEmail($email){
         $this->db->select('*');
         $this->db->from('pelanggan');

@@ -150,6 +150,16 @@
 		echo $this->session->flashdata('kosong');
 		echo '</div>';
 	}
+
+	// $total_item = 0;
+	// // Looping data keranjang belanja
+	// foreach($keranjang as $keranjang) { 
+	// 	// Ambil data produk
+	// 	// $jumlah_item = $keranjang['qty'];
+	// 	echo $keranjang['qty'];
+	// 	echo $jumlah_item;
+	// 	// $total_item += $jumlah;
+	// }
 	?>
 
 	<input type="hidden" name="id_pelanggan" value="<?php echo $pelanggan->id_pelanggan; ?>">
@@ -163,6 +173,11 @@
 			<label class="col-lg-3" for="kode_transaksi">Kode Transaksi</label>
 	        <input type="text" class="form-control border border-dark col-lg-4" id="kode_transaksi" name="kode_transaksi" value="<?php echo $kode_transaksi ?>" required readonly>
 	    </div>
+
+	    <!-- <div class="row form-group">
+			<label class="col-lg-3" for="total_item">Total Item</label>
+	        <input type="text" class="form-control border border-dark col-lg-4" id="total_item" name="total_item" value="<?php echo $total_item ?>" required readonly>
+	    </div> -->
 
 	    <div class="row form-group">
 			<label class="col-lg-3" for="nama_pelanggan">Nama Penerima</label>

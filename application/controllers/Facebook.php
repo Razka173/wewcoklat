@@ -43,6 +43,10 @@ class Facebook extends CI_Controller {
             
             // Insert or update user data
             $userID = $this->facebook_user->checkUser($userData);
+            if($userID==false){
+                $this->session->set_flashdata('warning', 'Email sudah terdaftar.');
+                redirect(base_url('masuk'),'refresh');
+            }
             
             // Check user data insert or update status
             if( !empty($userID) ){

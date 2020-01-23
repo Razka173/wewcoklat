@@ -46,7 +46,7 @@ class Google extends CI_Controller {
                 // Insert or update user data to the database
                 $userID = $this->google_user->checkUser($userData);
                 if($userID==false){
-                    $this->session->set_flashdata('warning', 'Email yang anda gunakan tidak terhubung dengan akun Google anda.');
+                    $this->session->set_flashdata('warning', 'Email sudah terdaftar.');
                     redirect(base_url('masuk'),'refresh');
                 }
                 
