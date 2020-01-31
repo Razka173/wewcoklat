@@ -231,12 +231,14 @@ class Alamat extends CI_Controller {
         echo $datas;
     }
 
-    function ongkir(){
+    function ongkir($total_item=1){
     	$id_alamat		= $this->input->post('no_alamat', TRUE);
     	$kota_asal      = 154;	// Jakarta Timur
     	$alamat 		= $this->alamat_pelanggan_model->detail($id_alamat);
         $tujuan 		= $alamat->id_kota;
-        $berat          = '1000';
+        $total_item 	= $this->input->post('total', TRUE);
+        $berat 			= 350; // Gram
+        $total_berat    = strval($berat*$total_item);
         $kurir 			= 'jne';
 
         //&courier=jne
@@ -250,7 +252,7 @@ class Alamat extends CI_Controller {
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "origin=$kota_asal&originType=city&destination=$tujuan&destinationType=city&weight=$berat&courier=$kurir",
+            CURLOPT_POSTFIELDS => "origin=$kota_asal&originType=city&destination=$tujuan&destinationType=city&weight=$total_berat&courier=$kurir",
             CURLOPT_HTTPHEADER => array(
               "content-type: application/x-www-form-urlencoded",
               "key: $this->api_key"
@@ -276,7 +278,7 @@ class Alamat extends CI_Controller {
                 $biaya           = $obj['rajaongkir']['results'][$i]['costs'][$j]['cost'][0]['value'];
                 $biaya_format    = number_format($obj['rajaongkir']['results'][$i]['costs'][$j]['cost'][0]['value']);
 
-                $baru .= "<option value='".$biaya."'>".$nama_pengiriman." - ".$biaya_format." - ".$service."</option>";
+                $baru .= "<option value='".$biaya."'>".$nama_pengiriman." - Rp".$biaya_format." - ".$service."</option>";
 
             }   
         }

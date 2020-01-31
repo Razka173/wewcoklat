@@ -38,7 +38,7 @@
 	}
 	?>
 
-	<table class="table-shopping-cart m-l-20" style="overflow-x: hidden;">
+	<table class="table-shopping-cart m-l-20" style="overflow-x: auto;">
 		<tr class="table-head">
 			<th class="text-center">GAMBAR</th>
 			<th class="text-center">PRODUK</th>
@@ -52,6 +52,7 @@
 		// Looping data keranjang belanja
 		foreach($keranjang as $keranjang) { 
 			// Ambil data produk
+			// var_dump($keranjang);
 			$id_produk 	= $keranjang['id'];
 			$produk 	= $this->produk_model->detail($id_produk);
 
@@ -127,7 +128,7 @@
 		?>
 		<tr class="table-row bg-primary text-strong" style="font-weight: bold; color: white;">
 			<td colspan="3" class="text-center text-white">Total Belanja</td>
-			<td></td>
+			<td colspan="1" class="text-center text-white"> <?php echo $this->cart->total_items(); ?></td>
 			<td colspan="1" class="text-center text-white">Rp. <?php echo number_format($this->cart->total(),'0',',','.') ?></td>
 			<td></td>
 		</tr>
@@ -150,21 +151,12 @@
 		echo $this->session->flashdata('kosong');
 		echo '</div>';
 	}
-
-	// $total_item = 0;
-	// // Looping data keranjang belanja
-	// foreach($keranjang as $keranjang) { 
-	// 	// Ambil data produk
-	// 	// $jumlah_item = $keranjang['qty'];
-	// 	echo $keranjang['qty'];
-	// 	echo $jumlah_item;
-	// 	// $total_item += $jumlah;
-	// }
 	?>
 
 	<input type="hidden" name="id_pelanggan" value="<?php echo $pelanggan->id_pelanggan; ?>">
 	<input type="hidden" name="jumlah_transaksi" value="<?php echo $this->cart->total(); ?>">
 	<input type="hidden" name="tanggal_transaksi" value="<?php echo date('Y-m-d'); ?>">
+	<!-- <input type="hidden" name="total_item" id="total_item" value="<?php echo $this->cart->total_items(); ?>"> -->
 
 
 	<div class="m-l-50 tabel-form">
@@ -174,10 +166,10 @@
 	        <input type="text" class="form-control border border-dark col-lg-4" id="kode_transaksi" name="kode_transaksi" value="<?php echo $kode_transaksi ?>" required readonly>
 	    </div>
 
-	    <!-- <div class="row form-group">
+	    <div class="row form-group">
 			<label class="col-lg-3" for="total_item">Total Item</label>
-	        <input type="text" class="form-control border border-dark col-lg-4" id="total_item" name="total_item" value="<?php echo $total_item ?>" required readonly>
-	    </div> -->
+	        <input type="text" class="form-control border border-dark col-lg-4" id="total_item" name="total_item" value="<?php echo $this->cart->total_items() ?>" required readonly>
+	    </div>
 
 	    <div class="row form-group">
 			<label class="col-lg-3" for="nama_pelanggan">Nama Penerima</label>
@@ -225,7 +217,7 @@
 				<option value="">- Pilih Tempat Janjian -</option>
 				<option value="UNJ">Kampus UNJ</option>
 				<option value="Depok">Depok</option>
-				<option value="lainnya">Lainnya</option>
+				<option value="lainnya">Tempat Lainnya</option>
 			</select>
 		</div>
 
@@ -278,18 +270,23 @@ $("#metode_pengiriman").change(function(){
     } 
 });
 
+// $("#total_item").change(function(){
+// 	var total_item = this.value;
+// });		
+
 $("#alamat_kirim").change(function(){
     var id_alamat = this.value;
-    cost(id_alamat);
+    var total_item = document.getElementById("total_item").value;
+    cost(id_alamat, total_item);
     $("#div_ongkir").show();
     
 });
 
-cost = function(id_alamat){
+cost = function(id_alamat,total_item){
     $.ajax({
     type: 'post',
     url: base_url + 'alamat/ongkir',
-    data: {no_alamat:id_alamat},
+    data: {no_alamat:id_alamat,total:total_item},
     dataType  : 'html',
     success: function (data) {
     	$("#list_ongkir").html(data);

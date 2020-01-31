@@ -108,18 +108,22 @@ class Belanja extends CI_Controller {
 						$this->session->set_flashdata('kosong', 'Lokasi COD harus diisi');
 						redirect(base_url('belanja/checkout'),'refresh');
 					}
-					$alamat 		= "COD :" . $alamat_cod;
+					$alamat 		= "COD : " . $alamat_cod;
 					$total_tagihan	= $i->post('jumlah_transaksi');				
 				}
 				if($i->post('metode_pengiriman')=='jne'){
 					$id_alamat 		= $i->post('alamat');
+					$ongkir 		= $i->post('ongkir');
 					if ( empty($id_alamat) ){
 						$this->session->set_flashdata('kosong', 'Alamat kirim harus diisi');
 						redirect(base_url('belanja/checkout'),'refresh');
 					}
+					if ( empty($ongkir) ){
+						$this->session->set_flashdata('kosong', 'Pilih Ongkir');
+						redirect(base_url('belanja/checkout'),'refresh');
+					}
 					$data_alamat 	= $this->alamat_pelanggan_model->detail($id_alamat);
 					$alamat 		= $data_alamat->alamat_detail;
-					$ongkir 		= $i->post('ongkir');
 					$tagihan 		= $i->post('jumlah_transaksi');
 					$total_tagihan 	=  $ongkir + $tagihan;
 
