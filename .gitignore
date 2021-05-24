@@ -32,5 +32,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 application.zip
 wewci_v1.19.zip
+application/config/database.php
 database.php
 
